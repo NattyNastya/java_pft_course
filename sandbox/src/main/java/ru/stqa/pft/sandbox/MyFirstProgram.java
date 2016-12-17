@@ -8,23 +8,25 @@ public class MyFirstProgram {
     hello("user");
     hello("Nastya");
 
-    double l = 5;
-    System.out.println("The area of a square with side " + l + " = " + area(l));
+    Square s = new Square();
+    s.l = 5;
+    System.out.println("The area of a square with side " + s.l + " = " + area(s));
 
-    double a = 6;
-    double b = 8;
-    System.out.println("The area of a rectangle with sides " + a + " and " + b + " = " + area(a, b));
+    Rectangle r = new Rectangle();
+    r.a = 6;
+    r.b = 8;
+    System.out.println("The area of a rectangle with sides " + r.a + " and " + r.b + " = " + area(r));
 	}
 
   public static void hello(String somebody) {
     System.out.println("Hello, " + somebody + "!");
   }
 
-  public static double area(double len) {
-    return len * len;
+  public static double area(Square s) {
+    return s.l * s.l;
   }
 
-  public static double area(double a, double b) {
-    return a * b;
+  public static double area(Rectangle r) {
+    return r.a * r.b;
   }
 }

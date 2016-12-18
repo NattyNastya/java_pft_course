@@ -9,4 +9,8 @@ public class Square {
   public Square(double l) {
     this.l = l;
   }
+
+  public double area() { //method
+    return this.l * this.l;
+  }
 }

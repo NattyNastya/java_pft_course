@@ -8,13 +8,13 @@ public class MyFirstProgram {
     hello("user");
     hello("Nastya");
 
-    Square s = new Square();
-    s.l = 5;
+    Square s = new Square(5);
+    //s.l = 5;
     System.out.println("The area of a square with side " + s.l + " = " + area(s));
 
-    Rectangle r = new Rectangle();
-    r.a = 6;
-    r.b = 8;
+    Rectangle r = new Rectangle(4, 6);
+    //r.a = 6;
+    //r.b = 8;
     System.out.println("The area of a rectangle with sides " + r.a + " and " + r.b + " = " + area(r));
 	}
 

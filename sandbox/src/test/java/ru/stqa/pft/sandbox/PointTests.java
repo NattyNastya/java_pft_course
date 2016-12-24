@@ -16,9 +16,9 @@ public class PointTests {
 
     System.out.println(p1.distance(p2));
 
-    double expRes = Math.rint(p1.distance(p2));
-    System.out.println(expRes);                 // Rounding the expected result
-    Assert.assertEquals(expRes, 3.0);
+    double actualRes = Math.rint(p1.distance(p2));
+    System.out.println(actualRes);                 // Rounding the actual result
+    Assert.assertEquals(actualRes, 3.0);
 
 
   }

@@ -9,15 +9,8 @@ public class ContactCreation extends TestBase {
 
     gotoContactCreationForm();
 
-    fillContactMiddleName();
-    fillContactLastName();
-    fillContactNickname();
-
-    //Here will be created Photo selection
-
-    fillContactTitle();
-    fillContactCompany();
-    fillContactAddress();
+    fillContactMainInfo(new ContactMainData("Kostya", "Pavlovich", "Mikhin",
+            "Super_duper", "Surgeons", "1st clinic", "Suhaya str."));
 
     //Fills Phone fields
     fillContactHomePhone();

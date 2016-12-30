@@ -118,22 +118,18 @@ public class TestBase {
     wd.findElement(By.name("address")).sendKeys(contactMainData.getGeneral_address());
   }
 
-  protected void fillContactNotes() {
-    wd.findElement(By.name("notes")).click();
-    wd.findElement(By.name("notes")).clear();
-    wd.findElement(By.name("notes")).sendKeys("Test notes");
-  }
-
-  protected void fillContactPhone2() {
-    wd.findElement(By.name("phone2")).click();
-    wd.findElement(By.name("phone2")).clear();
-    wd.findElement(By.name("phone2")).sendKeys("12312312");
-  }
-
-  protected void fillContactAddress2() {
+  protected void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
-    wd.findElement(By.name("address2")).sendKeys("Second Address");
+    wd.findElement(By.name("address2")).sendKeys(contactSecondaryData.getAddress_2());
+
+    wd.findElement(By.name("phone2")).click();
+    wd.findElement(By.name("phone2")).clear();
+    wd.findElement(By.name("phone2")).sendKeys(contactSecondaryData.getPhone_2());
+
+    wd.findElement(By.name("notes")).click();
+    wd.findElement(By.name("notes")).clear();
+    wd.findElement(By.name("notes")).sendKeys(contactSecondaryData.getNotes());
   }
 
   protected void fillContactHomepage() {

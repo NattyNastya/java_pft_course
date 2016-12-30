@@ -29,9 +29,7 @@ public class ContactCreation extends TestBase {
     selectContactGroup();
 
     //Fills Secondary subsections
-    fillContactAddress2();
-    fillContactPhone2();
-    fillContactNotes();
+    fillContactSecondaryInfo(new ContactSecondaryData("Second Address", "12312312", "Test notes"));
 
     submitContactCreation();
     returnToContactPage();

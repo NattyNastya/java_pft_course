@@ -118,6 +118,70 @@ public class TestBase {
     wd.findElement(By.name("address")).sendKeys(contactMainData.getGeneral_address());
   }
 
+  protected void fillContactPhones(ContactPhonesData contactPhonesData) {
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys(contactPhonesData.getHome_phone());
+
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name("mobile")).sendKeys(contactPhonesData.getMobile_phone());
+
+    wd.findElement(By.name("work")).click();
+    wd.findElement(By.name("work")).clear();
+    wd.findElement(By.name("work")).sendKeys(contactPhonesData.getWork_phone());
+
+    wd.findElement(By.name("fax")).click();
+    wd.findElement(By.name("fax")).clear();
+    wd.findElement(By.name("fax")).sendKeys(contactPhonesData.getFax());
+  }
+
+  protected void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData) {
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactAdditionalData.getEmail());
+
+    wd.findElement(By.name("email2")).click();
+    wd.findElement(By.name("email2")).clear();
+    wd.findElement(By.name("email2")).sendKeys(contactAdditionalData.getEmail_2());
+
+    wd.findElement(By.name("email3")).click();
+    wd.findElement(By.name("email3")).clear();
+    wd.findElement(By.name("email3")).sendKeys(contactAdditionalData.getEmail_3());
+
+    wd.findElement(By.name("homepage")).click();
+    wd.findElement(By.name("homepage")).clear();
+    wd.findElement(By.name("homepage")).sendKeys(contactAdditionalData.getHomepage_link());
+
+  //fillContactBirthday
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).click();
+    }
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).click();
+    }
+    wd.findElement(By.name("byear")).click();
+    wd.findElement(By.name("byear")).clear();
+    wd.findElement(By.name("byear")).sendKeys(contactAdditionalData.getBirthYear());
+
+    //Anniversary
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[32]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[32]")).click();
+    }
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[8]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[8]")).click();
+    }
+    wd.findElement(By.name("ayear")).click();
+    wd.findElement(By.name("ayear")).clear();
+    wd.findElement(By.name("ayear")).sendKeys(contactAdditionalData.getAnniverYear());
+  }
+
+  protected void selectContactGroup() {
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).click();
+    }
+  }
+
   protected void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
@@ -132,53 +196,9 @@ public class TestBase {
     wd.findElement(By.name("notes")).sendKeys(contactSecondaryData.getNotes());
   }
 
-  protected void fillContactHomepage() {
-    wd.findElement(By.name("homepage")).click();
-    wd.findElement(By.name("homepage")).clear();
-    wd.findElement(By.name("homepage")).sendKeys("http://www.1crp.by/");
-  }
 
-  protected void fillContactThirdEmail() {
-    wd.findElement(By.name("email3")).click();
-    wd.findElement(By.name("email3")).clear();
-    wd.findElement(By.name("email3")).sendKeys("-");
-  }
 
-  protected void fillContactSecondEmail() {
-    wd.findElement(By.name("email2")).click();
-    wd.findElement(By.name("email2")).clear();
-    wd.findElement(By.name("email2")).sendKeys("K.Test2");
-  }
 
-  protected void fillContactEmail() {
-    wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys("K.test");
-  }
-
-  protected void fillContactFax() {
-    wd.findElement(By.name("fax")).click();
-    wd.findElement(By.name("fax")).clear();
-    wd.findElement(By.name("fax")).sendKeys("-");
-  }
-
-  protected void fillContactWorkPhone() {
-    wd.findElement(By.name("work")).click();
-    wd.findElement(By.name("work")).clear();
-    wd.findElement(By.name("work")).sendKeys("+375170000000");
-  }
-
-  protected void fillContactMobilePhone() {
-    wd.findElement(By.name("mobile")).click();
-    wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys("+375290000000");
-  }
-
-  protected void fillContactHomePhone() {
-    wd.findElement(By.name("home")).click();
-    wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys("-");
-  }
 
 
   protected void returnToContactPage() {
@@ -187,36 +207,6 @@ public class TestBase {
 
   protected void submitContactCreation() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-  }
-
-  protected void selectContactGroup() {
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).click();
-    }
-  }
-
-  protected void fillContactAnniversary() {
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[32]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[32]")).click();
-    }
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[8]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[8]")).click();
-    }
-    wd.findElement(By.name("ayear")).click();
-    wd.findElement(By.name("ayear")).clear();
-    wd.findElement(By.name("ayear")).sendKeys("2010");
-  }
-
-  protected void fillContactBirthday() {
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).click();
-    }
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).click();
-    }
-    wd.findElement(By.name("byear")).click();
-    wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys("1988");
   }
 
   protected void gotoContactCreationForm() {

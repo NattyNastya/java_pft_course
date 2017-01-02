@@ -12,20 +12,12 @@ public class ContactCreation extends TestBase {
     fillContactMainInfo(new ContactMainData("Kostya", "Pavlovich", "Mikhin",
             "Super_duper", "Surgeons", "1st clinic", "Suhaya str."));
 
-    //Fills Phone fields
-    fillContactHomePhone();
-    fillContactMobilePhone();
-    fillContactWorkPhone();
-    fillContactFax();
+    //Fills Phone fields,
+    fillContactPhones(new ContactPhonesData("-", "+375290000000", "+375170000000", "-"));
 
-    //Fills Emails
-    fillContactEmail();
-    fillContactSecondEmail();
-    fillContactThirdEmail();
-
-    fillContactHomepage();
-    fillContactBirthday();
-    fillContactAnniversary();
+    //Fills Emails, Birthday and Anniversary dates
+    fillContactAdditionalInfo(new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
+            "http://www.1crp.by/", "1988", "2010"));
     selectContactGroup();
 
     //Fills Secondary subsections

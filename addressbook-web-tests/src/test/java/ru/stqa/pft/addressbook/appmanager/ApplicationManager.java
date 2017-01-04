@@ -10,8 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Z51-70 on 03.01.2017.
  */
-public class ApplicationManager {
-  FirefoxDriver wd;
+public class ApplicationManager extends GroupHelper {
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -39,46 +38,12 @@ public class ApplicationManager {
     wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
   }
 
-  public void returnToGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
-  }
-
-  public void submitCroupCreation() {
-    wd.findElement(By.name("submit")).click();
-  }
-
-  public void fillGroupForm(GroupData groupData) {
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).clear();
-    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
-    wd.findElement(By.name("group_header")).click();
-    wd.findElement(By.name("group_header")).clear();
-    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    wd.findElement(By.name("group_footer")).click();
-    wd.findElement(By.name("group_footer")).clear();
-    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-  }
-
-  public void initGroupCreation() {
-    wd.findElement(By.name("new")).click();
-  }
-
   public void gotoGroupPage() {
     wd.findElement(By.linkText("groups")).click();
   }
 
   public void stop() {
     wd.quit();
-  }
-
-  public void deleteSelectedGroups() {
-    wd.findElement(By.name("delete")).click();
-  }
-
-  public void selectGroup() {
-    if (!wd.findElement(By.name("selected[]")).isSelected()) {
-      wd.findElement(By.name("selected[]")).click();
-    }
   }
 
   // Fill in New Contact form

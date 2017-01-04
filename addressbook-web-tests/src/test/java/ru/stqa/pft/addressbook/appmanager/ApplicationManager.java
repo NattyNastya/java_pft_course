@@ -10,7 +10,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Z51-70 on 03.01.2017.
  */
-public class ApplicationManager extends GroupHelper {
+public class ApplicationManager {
+
+  FirefoxDriver wd;
+
+  private GroupHelper groupHelper;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -25,6 +29,7 @@ public class ApplicationManager extends GroupHelper {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
+    groupHelper = new GroupHelper(wd);
     login("admin", "secret");
   }
 
@@ -167,5 +172,9 @@ public class ApplicationManager extends GroupHelper {
 
   public void gotoContactCreationForm() {
     wd.findElement(By.linkText("add new")).click();
+  }
+
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
   }
 }

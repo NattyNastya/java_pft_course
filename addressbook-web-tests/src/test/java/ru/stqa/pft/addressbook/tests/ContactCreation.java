@@ -11,24 +11,24 @@ public class ContactCreation extends TestBase {
   @Test
   public void ContactCreation() {
 
-    app.gotoContactCreationForm();
+    app.getNavigationHelper().gotoContactCreationForm();
 
-    app.fillContactMainInfo(new ContactMainData("Kostya", "Pavlovich", "Mikhin",
+    app.getContactHelper().fillContactMainInfo(new ContactMainData("Kostya", "Pavlovich", "Mikhin",
             "Super_duper", "Surgeons", "1st clinic", "Suhaya str."));
 
     //Fills Phone fields,
-    app.fillContactPhones(new ContactPhonesData("-", "+375290000000", "+375170000000", "-"));
+    app.getContactHelper().fillContactPhones(new ContactPhonesData("-", "+375290000000", "+375170000000", "-"));
 
     //Fills Emails, Birthday and Anniversary dates
-    app.fillContactAdditionalInfo(new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
+    app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
             "http://www.1crp.by/", "1988", "2010"));
-    app.selectContactGroup();
+    app.getContactHelper().selectContactGroup();
 
     //Fills Secondary subsections
-    app.fillContactSecondaryInfo(new ContactSecondaryData("Second Address", "12312312", "Test notes"));
+    app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Address", "12312312", "Test notes"));
 
-    app.submitContactCreation();
-    app.returnToContactPage();
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().returnToContactPage();
   }
 
 }

@@ -47,4 +47,12 @@ public class GroupHelper {
       wd.findElement(By.name("selected[]")).click();
     }
   }
+
+  public void initGroupModification() {
+    wd.findElement(By.name("edit")).click();
+  }
+
+  public void submitGroupModification() {
+    wd.findElement(By.name("update")).click();
+  }
 }

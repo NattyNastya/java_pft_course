@@ -20,4 +20,12 @@ public class NavigationHelper {
   public void gotoContactCreationForm() {
     wd.findElement(By.linkText("add new")).click();
   }
+
+  public void gotoHomePage() {
+    wd.findElement(By.linkText("home")).click();
+  }
+
+  public void gotoContactEditPage() {
+    wd.findElementByXPath("//table[@id='maintable']/tbody/tr[2]/td[8]").click();
+  }
 }

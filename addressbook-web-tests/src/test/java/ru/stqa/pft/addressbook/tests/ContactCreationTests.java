@@ -6,7 +6,7 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
-public class ContactCreation extends TestBase {
+public class ContactCreationTests extends TestBase {
 
   @Test
   public void ContactCreation() {

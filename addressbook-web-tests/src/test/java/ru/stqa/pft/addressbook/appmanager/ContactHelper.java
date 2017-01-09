@@ -86,6 +86,10 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void submitContactModification() {
-    wd.findElementByName("update").click();
+    wd.findElementByXPath("//div[@id='content']/form[1]/input[22]").click();
+  }
+
+  public void submitContactDeletion() {
+    wd.findElementByXPath("//div[@id='content']/form[2]/input[2]").click();
   }
 }

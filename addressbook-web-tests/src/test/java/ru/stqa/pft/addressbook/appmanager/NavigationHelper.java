@@ -1,15 +1,16 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by Z51-70 on 05.01.2017.
  */
 public class NavigationHelper {
-  private FirefoxDriver wd;
+  private WebDriver wd;
 
-  public NavigationHelper(FirefoxDriver wd) {
+  public NavigationHelper(WebDriver wd) {
     this.wd = wd;
   }
 
@@ -26,6 +27,6 @@ public class NavigationHelper {
   }
 
   public void gotoContactEditPage() {
-    wd.findElementByXPath("//table[@id='maintable']/tbody/tr[2]/td[8]").click();
+    wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]")).click();
   }
 }

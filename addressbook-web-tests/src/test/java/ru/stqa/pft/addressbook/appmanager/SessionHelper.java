@@ -1,15 +1,16 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by Z51-70 on 05.01.2017.
  */
 public class SessionHelper {
-  private FirefoxDriver wd;
+  private WebDriver wd;
 
-  public SessionHelper(FirefoxDriver wd) {
+  public SessionHelper(WebDriver wd) {
     this.wd = wd;
   }
 

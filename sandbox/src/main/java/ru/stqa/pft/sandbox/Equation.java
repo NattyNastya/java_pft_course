@@ -18,15 +18,26 @@ public class Equation {
 
     double d = b*b - 4*a*c; //calculated the discriminant of the equation
 
-    if (d > 0) {
-      n = 2;
-    } else {
-      if (d == 0) {
+    int i = (a != 0) ? ((d > 0) ? n = 2 : ((d == 0) ? (n = 1) : (n = 0))) : ((b != 0) ? (n = 1) : ((c != 0) ? (n = 0) : (n = -1)));
+
+    /*if (a != 0) {
+      if (d > 0) {
+        n = 2;
+      } else if (d == 0) {
         n = 1;
       } else {
         n = 0;
       }
-    }
+
+    } else if (b != 0) {
+      n = 1;
+
+    } else if (c != 0) {
+      n = 0;
+
+    } else {
+      n = -1;
+    }*/
   }
 
   public int rootNumber() {

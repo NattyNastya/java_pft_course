@@ -2,7 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Z51-70 on 08.01.2017.
@@ -25,4 +25,9 @@ public class BaseHelper {
       wd.findElement(By.xpath(xpathExpression)).click();
     }
   }
+
+  /*public void dropdwnMenuSelectDay(String xpathExpression, String selectValue) {
+    Select selector = new Select(wd.findElement(By.xpath(xpathExpression))).selectByValue(selectValue);
+  }*/
+
 }

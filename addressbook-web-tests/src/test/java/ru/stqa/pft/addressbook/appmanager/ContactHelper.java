@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactAdditionalData;
 import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
@@ -57,6 +56,8 @@ public class ContactHelper extends BaseHelper {
 
     //fillContactBirthday
     dropdownMenuSelection("//div[@id='content']/form/select[1]//option[21]"); //select Birth Day
+    //dropdwnMenuSelectDay("//div[@id='content']/form/select[1]/", "6");
+
     dropdownMenuSelection("//div[@id='content']/form/select[2]//option[4]"); //select Birth Month
     ClickClearAndSendkeys("byear", contactAdditionalData.getBirthYear());
 

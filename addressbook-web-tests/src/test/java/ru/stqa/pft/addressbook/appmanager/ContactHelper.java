@@ -18,53 +18,53 @@ public class ContactHelper extends BaseHelper {
 
   // Fill in New Contact form
   public void fillContactMainInfo(ContactMainData contactMainData) {
-    ClickClearAndSendkeys("firstname", contactMainData.getFirst_name());
+    ClickClearAndSendkeys(By.name("firstname"), contactMainData.getFirst_name());
 
-    ClickClearAndSendkeys("middlename", contactMainData.getMiddle_name());
+    ClickClearAndSendkeys(By.name("middlename"), contactMainData.getMiddle_name());
 
-    ClickClearAndSendkeys("lastname", contactMainData.getLast_name());
+    ClickClearAndSendkeys(By.name("lastname"), contactMainData.getLast_name());
 
-    ClickClearAndSendkeys("nickname", contactMainData.getNickname());
+    ClickClearAndSendkeys(By.name("nickname"), contactMainData.getNickname());
 
     //Here will be photo selection
 
-    ClickClearAndSendkeys("title", contactMainData.getTitle());
+    ClickClearAndSendkeys(By.name("title"), contactMainData.getTitle());
 
-    ClickClearAndSendkeys("company", contactMainData.getContact_company());
+    ClickClearAndSendkeys(By.name("company"), contactMainData.getContact_company());
 
-    ClickClearAndSendkeys("address", contactMainData.getGeneral_address());
+    ClickClearAndSendkeys(By.name("address"), contactMainData.getGeneral_address());
   }
 
   public void fillContactPhones(ContactPhonesData contactPhonesData) {
-    ClickClearAndSendkeys("home", contactPhonesData.getHome_phone());
+    ClickClearAndSendkeys(By.name("home"), contactPhonesData.getHome_phone());
 
-    ClickClearAndSendkeys("mobile", contactPhonesData.getMobile_phone());
+    ClickClearAndSendkeys(By.name("mobile"), contactPhonesData.getMobile_phone());
 
-    ClickClearAndSendkeys("work", contactPhonesData.getWork_phone());
+    ClickClearAndSendkeys(By.name("work"), contactPhonesData.getWork_phone());
 
-    ClickClearAndSendkeys("fax", contactPhonesData.getFax());
+    ClickClearAndSendkeys(By.name("fax"), contactPhonesData.getFax());
   }
 
   public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData) {
-    ClickClearAndSendkeys("email", contactAdditionalData.getEmail());
+    ClickClearAndSendkeys(By.name("email"), contactAdditionalData.getEmail());
 
-    ClickClearAndSendkeys("email2", contactAdditionalData.getEmail_2());
+    ClickClearAndSendkeys(By.name("email2"), contactAdditionalData.getEmail_2());
 
-    ClickClearAndSendkeys("email3", contactAdditionalData.getEmail_3());
+    ClickClearAndSendkeys(By.name("email3"), contactAdditionalData.getEmail_3());
 
-    ClickClearAndSendkeys("homepage", contactAdditionalData.getHomepage_link());
+    ClickClearAndSendkeys(By.name("homepage"), contactAdditionalData.getHomepage_link());
 
     //fillContactBirthday
     dropdownMenuSelection("//div[@id='content']/form/select[1]//option[21]"); //select Birth Day
     //dropdwnMenuSelectDay("//div[@id='content']/form/select[1]/", "6");
 
     dropdownMenuSelection("//div[@id='content']/form/select[2]//option[4]"); //select Birth Month
-    ClickClearAndSendkeys("byear", contactAdditionalData.getBirthYear());
+    ClickClearAndSendkeys(By.name("byear"), contactAdditionalData.getBirthYear());
 
     //Anniversary
     dropdownMenuSelection("//div[@id='content']/form/select[3]//option[32]"); //select Anniversary Day
     dropdownMenuSelection("//div[@id='content']/form/select[4]//option[8]"); //select Anniversary Month
-    ClickClearAndSendkeys("ayear", contactAdditionalData.getAnniverYear());
+    ClickClearAndSendkeys(By.name("ayear"), contactAdditionalData.getAnniverYear());
   }
 
   public void selectContactGroup() {
@@ -72,11 +72,11 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
-    ClickClearAndSendkeys("address2", contactSecondaryData.getAddress_2());
+    ClickClearAndSendkeys(By.name("address2"), contactSecondaryData.getAddress_2());
 
-    ClickClearAndSendkeys("phone2", contactSecondaryData.getPhone_2());
+    ClickClearAndSendkeys(By.name("phone2"), contactSecondaryData.getPhone_2());
 
-    ClickClearAndSendkeys("notes", contactSecondaryData.getNotes());
+    ClickClearAndSendkeys(By.name("notes"), contactSecondaryData.getNotes());
   }
 
   public void returnToContactPage() {

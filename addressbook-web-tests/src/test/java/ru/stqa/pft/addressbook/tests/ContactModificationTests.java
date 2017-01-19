@@ -15,8 +15,8 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
     app.getNavigationHelper().gotoContactEditPage();
-    app.getContactHelper().fillContactMainInfo(new ContactMainData("Kostya - test", "Pavlovich - test",
-            "Mikhin - test", "Super_duper-test", "The Surgeon", "1st clinic - test",
+    app.getContactHelper().fillContactMainInfo(new ContactMainData("Kostya - test", "Pavlovich",
+            "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
             "Suhaya str. - test"));
 
     //Fills Phone fields,

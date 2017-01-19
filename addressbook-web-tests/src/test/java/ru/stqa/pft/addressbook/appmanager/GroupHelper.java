@@ -8,11 +8,10 @@ import ru.stqa.pft.addressbook.model.GroupData;
 /**
  * Created by Z51-70 on 05.01.2017.
  */
-public class GroupHelper {
-  private WebDriver wd;
+public class GroupHelper extends BaseHelper {
 
   public GroupHelper(WebDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void returnToGroupPage() {
@@ -20,10 +19,11 @@ public class GroupHelper {
   }
 
   public void submitCroupCreation() {
-    wd.findElement(By.name("submit")).click();
+    click(By.name("submit"));
   }
 
   public void fillGroupForm(GroupData groupData) {
+
     wd.findElement(By.name("group_name")).click();
     wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getName());

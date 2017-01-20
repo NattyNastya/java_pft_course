@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by Z51-70 on 08.01.2017.
@@ -13,9 +14,16 @@ public class BaseHelper {
     this.wd = wd;
   }
 
-  protected void click(By locator) {
-    wd.findElement(locator).click();
+  public WebElement findElement(By by) {
+    return wd.findElement(by);
   }
+
+  protected void click (By locator) {
+    findElement(locator).click();
+  }
+  /*protected void click(By locator) {
+    wd.findElement(locator).click();
+  }*/
 
 
   public void clickClearAndSendkeys(By locator, String send_keys) {

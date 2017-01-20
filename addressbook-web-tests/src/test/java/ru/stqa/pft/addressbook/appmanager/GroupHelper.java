@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import static org.openqa.selenium.By.linkText;
+import static org.openqa.selenium.By.name;
+
 /**
  * Created by Z51-70 on 05.01.2017.
  */
@@ -14,38 +17,38 @@ public class GroupHelper extends BaseHelper {
   }
 
   public void returnToGroupPage() {
-    click(By.linkText("group page"));
+    click(linkText("group page"));
   }
 
   public void submitCroupCreation() {
-    click(By.name("submit"));
+    click(name("submit"));
   }
 
   public void fillGroupForm(GroupData groupData) {
-    clickClearAndSendkeys(By.name("group_header"), groupData.getHeader());
-    clickClearAndSendkeys(By.name("group_header"), groupData.getHeader());
-    clickClearAndSendkeys(By.name("group_footer"), groupData.getFooter());
+    clickClearAndSendkeys(name("group_header"), groupData.getHeader());
+    clickClearAndSendkeys(name("group_header"), groupData.getHeader());
+    clickClearAndSendkeys(name("group_footer"), groupData.getFooter());
   }
 
   public void initGroupCreation() {
-    click(By.name("new"));
+    click(name("new"));
   }
 
   public void deleteSelectedGroups() {
-    click(By.name("delete"));
+    click(name("delete"));
   }
 
   public void selectGroup() {
-    if (!wd.findElement(By.name("selected[]")).isSelected()) {
-      wd.findElement(By.name("selected[]")).click();
+    if (!wd.findElement(name("selected[]")).isSelected()) {
+      wd.findElement(name("selected[]")).click();
     }
   }
 
   public void initGroupModification() {
-    click(By.name("edit"));
+    click(name("edit"));
   }
 
   public void submitGroupModification() {
-    click(By.name("update"));
+    click(name("update"));
   }
 }

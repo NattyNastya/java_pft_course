@@ -13,7 +13,7 @@ public class ContactCreationTests extends TestBase {
 
     app.getNavigationHelper().gotoContactCreationForm();
 
-    app.getContactHelper().fillContactMainInfo(new ContactMainData("NASTYA", null, "Mikhin",
+    app.getContactHelper().fillContactMainInfo(new ContactMainData("ANNA", null, "Mikhin",
             "Super_duper", "Surgeons", "1st clinic", "Suhaya str."));
 
     //Fills Phone fields,

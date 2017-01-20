@@ -25,7 +25,7 @@ public class GroupHelper extends BaseHelper {
   }
 
   public void fillGroupForm(GroupData groupData) {
-    clickClearAndSendkeys(name("group_header"), groupData.getHeader());
+    clickClearAndSendkeys(name("group_name"), groupData.getHeader());
     clickClearAndSendkeys(name("group_header"), groupData.getHeader());
     clickClearAndSendkeys(name("group_footer"), groupData.getFooter());
   }

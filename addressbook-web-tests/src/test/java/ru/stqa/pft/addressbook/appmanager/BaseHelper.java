@@ -18,7 +18,7 @@ public class BaseHelper {
   }
 
 
-  public void ClickClearAndSendkeys(By locator, String send_keys) {
+  public void clickClearAndSendkeys(By locator, String send_keys) {
     wd.findElement(locator).click();
 
     if(send_keys != null) {

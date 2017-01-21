@@ -59,19 +59,19 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("homepage"), contactAdditionalData.getHomepage_link());
 
     //fillContactBirthday
-    dropdownMenuSelection("19"); //select Birth Day
+    dropdownMenuSelection(xpath("//form/select[1]"),"19"); //select Birth Day
 
-    dropdownMenuSelection("March"); //select Birth Month
+    dropdownMenuSelection(xpath("//form/select[2]"),"March"); //select Birth Month
     clickClearAndSendkeys(name("byear"), contactAdditionalData.getBirthYear());
 
     //Anniversary
-    dropdownMenuSelection("30"); //select Anniversary Day
-    dropdownMenuSelection("July"); //select Anniversary Month
+    dropdownMenuSelection(xpath("//form/select[3]"),"30"); //select Anniversary Day
+    dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
     clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
   }
 
   public void selectContactGroup() {
-    dropdownMenuSelection("The Surgeons");
+    dropdownMenuSelection(xpath("//form/select[5]"),"5");
   }
 
   public void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {

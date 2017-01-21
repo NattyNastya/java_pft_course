@@ -44,24 +44,19 @@ public class BaseHelper {
 
     if(send_keys != null) {
       String existingTest = wd.findElement(locator).getAttribute("value");
-      if (!send_keys.equals(existingTest)) {
+      if (existingTest.isEmpty()) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(send_keys);
+      } else if (!send_keys.equals(existingTest)) {
         wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(send_keys);
       }
     }
   }
 
-
-  /*public void dropdownMenuSelection(String xpathExpression) {
-    if (!  wd.findElement(By.xpath(xpathExpression)).isSelected()) {
-      wd.findElement(By.xpath(xpathExpression)).click();
-    }
-  }*/
-
-  public void dropdownMenuSelection (String text) {
-    Select select = new Select(wd.findElement(By.tagName("select")));
-    //select.deselectAll();
-    select.selectByVisibleText(text);
+  public void dropdownMenuSelection (By locator, String selectValue) {
+    Select select = new Select(findElement(locator));
+    select.selectByValue(selectValue);
   }
 
 

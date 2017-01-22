@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
     app.getNavigationHelper().gotoContactEditPage();
-    app.getContactHelper().fillContactMainInfo(new ContactMainData("Kostya - test", "Pavlovich",
+    app.getContactHelper().fillContactMainInfo(new ContactMainData(null, "Pavlovich",
             "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
             "Suhaya str. - test"));
 
@@ -25,8 +25,9 @@ public class ContactModificationTests extends TestBase {
 
     //Fills Emails, Birthday and Anniversary dates
     app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("Kostya.test@mail.ru",
+
             "Konstantin.Test2@gmail.com", "none",
-            "http://www.1crp.by/uz-spec", "1987", "2012"));
+            "http://www.1crp.by/uz-spec", "1987", "2012", null), false);
     ///app.getContactHelper().selectContactGroup();
 
     //Fills Secondary subsections

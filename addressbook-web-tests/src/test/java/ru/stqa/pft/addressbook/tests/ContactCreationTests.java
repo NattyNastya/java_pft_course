@@ -21,8 +21,11 @@ public class ContactCreationTests extends TestBase {
 
     //Fills Emails, Birthday and Anniversary dates
     app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-            "http://www.1crp.by/", "1988", "2010"));
-    app.getContactHelper().selectContactGroup();
+            "http://www.1crp.by/", "1988", "2010", "TEST3"), true);
+
+
+
+    // app.getContactHelper().selectContactGroup();
 
     //Fills Secondary subsections
     app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Address", "12312312", "Test notes"));

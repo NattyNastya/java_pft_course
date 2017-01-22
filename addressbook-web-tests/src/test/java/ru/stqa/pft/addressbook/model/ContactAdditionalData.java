@@ -7,14 +7,17 @@ public class ContactAdditionalData {
   private final String homepage_link;
   private final String birthYear;
   private final String anniverYear;
+  private final String group;
 
-  public ContactAdditionalData(String email, String email_2, String email_3, String homepage_link, String birthYear, String anniverYear) {
+  public ContactAdditionalData(String email, String email_2, String email_3, String homepage_link, String birthYear,
+                               String anniverYear, String group) {
     this.email = email;
     this.email_2 = email_2;
     this.email_3 = email_3;
     this.homepage_link = homepage_link;
     this.birthYear = birthYear;
     this.anniverYear = anniverYear;
+    this.group = group;
   }
 
   public String getEmail() {
@@ -39,5 +42,9 @@ public class ContactAdditionalData {
 
   public String getAnniverYear() {
     return anniverYear;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +23,7 @@ public class BaseHelper {
     return wd.findElement(by);
   }
 
-  public boolean isElementPresented (By locator) {
+  /*public boolean isElementPresented (By locator) {
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     List<WebElement> list = wd.findElements(locator);
     wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -30,6 +31,15 @@ public class BaseHelper {
       return false;
     } else {
       return list.get(0).isDisplayed();
+    }
+  }*/
+
+  public boolean isElementPresented (By locator) {
+    try {
+      wd.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
     }
   }
 

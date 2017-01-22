@@ -2,6 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactAdditionalData;
 import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
@@ -49,7 +51,7 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("fax"), contactPhonesData.getFax());
   }
 
-  public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData) {
+  public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData, boolean creation) {
     clickClearAndSendkeys(name("email"), contactAdditionalData.getEmail());
 
     clickClearAndSendkeys(name("email2"), contactAdditionalData.getEmail_2());
@@ -68,11 +70,17 @@ public class ContactHelper extends BaseHelper {
     dropdownMenuSelection(xpath("//form/select[3]"),"30"); //select Anniversary Day
     dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
     clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
+
+    if (creation) {
+      new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactAdditionalData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresented(name("new_group")));
+    }
   }
 
-  public void selectContactGroup() {
+  /*public void selectContactGroup() {
     dropdownMenuSelection(xpath("//form/select[5]"),"5");
-  }
+  }*/
 
   public void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
     clickClearAndSendkeys(name("address2"), contactSecondaryData.getAddress_2());

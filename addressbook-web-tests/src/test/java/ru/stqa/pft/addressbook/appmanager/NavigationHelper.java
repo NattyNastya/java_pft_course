@@ -7,15 +7,20 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by Z51-70 on 05.01.2017.
  */
-public class NavigationHelper {
-  private WebDriver wd;
+public class NavigationHelper extends BaseHelper {
+  //private WebDriver wd;
 
   public NavigationHelper(WebDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    if (isElementPresented(By.xpath("//h1"))
+            && wd.findElement(By.xpath("//h1")).getText().equals("Groups")
+            && isElementPresented(By.name("new"))) {
+     return;
+    }
+    click(By.linkText("groups"));
   }
 
   public void gotoContactCreationForm() {

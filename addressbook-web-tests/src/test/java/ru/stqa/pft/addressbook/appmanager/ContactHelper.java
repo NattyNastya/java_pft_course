@@ -71,10 +71,11 @@ public class ContactHelper extends BaseHelper {
     dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
     clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
 
+    //creation = true -> select group exist on the page, else - does not exist
     if (creation) {
       new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactAdditionalData.getGroup());
     } else {
-      Assert.assertFalse(isElementPresented(name("new_group")));
+      Assert.assertFalse(isElementPresented(name("new_group"))); //check that element shouldn't exist
     }
   }
 

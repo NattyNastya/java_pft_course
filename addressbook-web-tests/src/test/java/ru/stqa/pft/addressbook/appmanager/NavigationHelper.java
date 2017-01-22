@@ -24,14 +24,27 @@ public class NavigationHelper extends BaseHelper {
   }
 
   public void gotoContactCreationForm() {
-    wd.findElement(By.linkText("add new")).click();
+    if (isElementPresented(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+            && isElementPresented(By.name("submit"))) {
+      return;
+    }
+    click(By.linkText("add new"));
   }
 
   public void gotoHomePage() {
-    wd.findElement(By.linkText("home")).click();
+    if (isElementPresented(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
   }
 
   public void gotoContactEditPage() {
-    wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]")).click();
+    if (isElementPresented(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+            && isElementPresented(By.name("update"))) {
+      return;
+    }
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
   }
 }

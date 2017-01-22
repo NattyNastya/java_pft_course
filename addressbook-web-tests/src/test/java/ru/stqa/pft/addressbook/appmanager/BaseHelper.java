@@ -56,6 +56,10 @@ public class BaseHelper {
 
   public void dropdownMenuSelection (By locator, String selectValue) {
     Select select = new Select(findElement(locator));
+    if (findElement(locator).isSelected()) {
+      findElement(locator).click();
+      findElement(locator).clear();
+    }
     select.selectByValue(selectValue);
   }
 

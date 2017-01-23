@@ -23,7 +23,8 @@ public class BaseHelper {
     return wd.findElement(by);
   }
 
-  public boolean isElementPresented (By locator) {
+
+  /*public boolean isElementPresented (By locator) {
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     List<WebElement> list = wd.findElements(locator);
     wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -32,17 +33,17 @@ public class BaseHelper {
     } else {
       return list.get(0).isDisplayed();
     }
-  }
+  }*/
 
    // It is method from lesson (do not work with my code О_о)
-  /*public boolean isElementPresented (By locator) {
+  public boolean isElementPresented (By locator) {
     try {
       wd.findElement(locator);
       return true;
     } catch (NoSuchElementException ex) {
       return false;
     }
-  }*/
+  }
 
   protected void click (By locator) {
     if (isElementPresented(locator)) {
@@ -51,7 +52,7 @@ public class BaseHelper {
   }
 
   public void clickClearAndSendkeys(By locator, String send_keys) {
-    findElement(locator).click();
+    //findElement(locator).click();
 
     if(send_keys != null) {
       String existingTest = wd.findElement(locator).getAttribute("value");

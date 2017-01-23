@@ -34,8 +34,8 @@ public class BaseHelper {
     }
   }
 
-  /* // It is method from lesson (do not work with my code О_о)
-  public boolean isElementPresented (By locator) {
+   // It is method from lesson (do not work with my code О_о)
+  /*public boolean isElementPresented (By locator) {
     try {
       wd.findElement(locator);
       return true;
@@ -65,13 +65,13 @@ public class BaseHelper {
     }
   }
 
-  public void dropdownMenuSelection (By locator, String selectValue) {
+  public void dropdownMenuSelection (By locator, String text) {
     Select select = new Select(findElement(locator));
     if (findElement(locator).isSelected()) {
       findElement(locator).click();
       findElement(locator).clear();
     }
-    select.selectByValue(selectValue);
+    select.selectByVisibleText(text);
   }
 
 

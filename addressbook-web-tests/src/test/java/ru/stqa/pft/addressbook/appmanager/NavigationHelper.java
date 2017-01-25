@@ -15,8 +15,8 @@ public class NavigationHelper extends BaseHelper {
   }
 
   public void gotoGroupPage() {
-    if (isElementPresented(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Groups")
+    if (isElementPresented(By.xpath("//.//*[@id='content']/h1"))
+            && wd.findElement(By.xpath("//.//*[@id='content']/h1")).getText().equals("Groups")
             && isElementPresented(By.name("new"))) {
      return;
     }
@@ -24,8 +24,8 @@ public class NavigationHelper extends BaseHelper {
   }
 
   public void gotoContactCreationForm() {
-    if (isElementPresented(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+    if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
+            && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
             && isElementPresented(By.name("submit"))) {
       return;
     }
@@ -40,8 +40,8 @@ public class NavigationHelper extends BaseHelper {
   }
 
   public void gotoContactEditPage() {
-    if (isElementPresented(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+    if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
+            && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
             && isElementPresented(By.name("update"))) {
       return;
     }

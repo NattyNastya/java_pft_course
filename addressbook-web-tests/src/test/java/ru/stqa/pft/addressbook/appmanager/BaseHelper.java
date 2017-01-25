@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,6 +37,9 @@ public class BaseHelper {
 
    // It is method from lesson (do not work with my code О_о)
   public boolean isElementPresented (By locator) {
+    wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    List<WebElement> list = wd.findElements(locator);
+    wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     try {
       wd.findElement(locator);
       return true;

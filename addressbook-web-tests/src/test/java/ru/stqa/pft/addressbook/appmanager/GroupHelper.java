@@ -20,7 +20,7 @@ public class GroupHelper extends BaseHelper {
     click(linkText("group page"));
   }
 
-  public void submitCroupCreation() {
+  public void submitGroupCreation() {
     click(name("submit"));
   }
 
@@ -55,7 +55,7 @@ public class GroupHelper extends BaseHelper {
   public void createGroup(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
-    submitCroupCreation();
+    submitGroupCreation();
     returnToGroupPage();
   }
 

@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAdditionalData;
 import ru.stqa.pft.addressbook.model.ContactMainData;
@@ -12,26 +13,14 @@ public class ContactCreationTests extends TestBase {
   public void ContactCreation() {
 
     app.getNavigationHelper().gotoContactCreationForm();
-
-    app.getContactHelper().fillContactMainInfo(new ContactMainData("ANNA", null, "Mikhin",
-            "Super_duper", "Surgeons", "1st clinic", "Suhaya str."));
-
-    //Fills Phone fields,
-    app.getContactHelper().fillContactPhones(new ContactPhonesData("-", "+375290000000", "+375170000000", "-"));
-
-    //Fills Emails, Birthday and Anniversary dates
-    app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-            "http://www.1crp.by/", "1988", "2010", "TEST3"), true);
-
-
-
-    // app.getContactHelper().selectContactGroup();
-
-    //Fills Secondary subsections
-    app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Address", "12312312", "Test notes"));
-
-    app.getContactHelper().submitContactCreation();
-    app.getContactHelper().returnToContactPage();
+    app.getContactHelper().createContact(
+            new ContactMainData("ANNA", null, "Mikhin",
+                    "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
+            new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
+            new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
+                    "http://www.1crp.by/", "1988", "2010", "The Surgeons"),
+            new ContactSecondaryData("Second Address", "12312312",
+                    "Test notes"));
   }
 
 }

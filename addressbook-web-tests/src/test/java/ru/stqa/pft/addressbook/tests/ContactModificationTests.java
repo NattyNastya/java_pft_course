@@ -14,6 +14,19 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
+
+    if (! app.getContactHelper().isThereAContact()) {
+      app.getNavigationHelper().gotoContactCreationForm();
+      app.getContactHelper().createContact(
+              new ContactMainData("ANNA", null, "Mikhin",
+                      "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
+              new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
+              new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
+                      "http://www.1crp.by/", "1988", "2010", "The Surgeons"),
+              new ContactSecondaryData("Second Address", "12312312",
+                      "Test notes"));
+    }
+
     app.getNavigationHelper().gotoContactEditPage();
     app.getContactHelper().fillContactMainInfo(new ContactMainData(null, "Pavlovich",
             "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
@@ -28,7 +41,8 @@ public class ContactModificationTests extends TestBase {
 
             "Konstantin.Test2@gmail.com", "none",
             "http://www.1crp.by/uz-spec", "1987", "2012", null), false);
-    ///app.getContactHelper().selectContactGroup();
+
+    //app.getContactHelper().selectContactGroup();
 
     //Fills Secondary subsections
     app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Test Address",

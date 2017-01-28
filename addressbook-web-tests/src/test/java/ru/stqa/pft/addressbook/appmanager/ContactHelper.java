@@ -71,7 +71,7 @@ public class ContactHelper extends BaseHelper {
     dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
     clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
 
-    //creation = true -> select group exist on the page, else - does not exist
+    //creation = true -> select Group exist on the page, else - does not exist
     if (creation) {
       new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactAdditionalData.getGroup());
     } else {
@@ -92,18 +92,37 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void returnToContactPage() {
-    findElement(linkText("add new")).click();
+    findElement(linkText("home")).click();
   }
 
   public void submitContactCreation() {
     findElement(xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  public void submitContactModification() {
+  public void  submitContactModification() {
     wd.findElement(xpath("//div[@id='content']/form[1]/input[22]")).click();
   }
 
   public void submitContactDeletion() {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
+  }
+
+  public void createContact(ContactMainData cMainData, ContactPhonesData cPhonesData,
+                            ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+    fillContactInfo(cMainData, cPhonesData, cAdditionalData, cSecondaryData);
+    submitContactCreation();
+    returnToContactPage();
+  }
+
+  private void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
+                               ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+    fillContactMainInfo(cMainData);
+    fillContactPhones(cPhonesData);
+    fillContactAdditionalInfo(cAdditionalData, true);
+    fillContactSecondaryInfo(cSecondaryData);
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresented(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
   }
 }

@@ -114,7 +114,7 @@ public class ContactHelper extends BaseHelper {
     returnToContactPage();
   }
 
-  private void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
+  public void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
                                ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactMainInfo(cMainData);
     fillContactPhones(cPhonesData);
@@ -122,7 +122,19 @@ public class ContactHelper extends BaseHelper {
     fillContactSecondaryInfo(cSecondaryData);
   }
 
+  public void editContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
+                              ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+    fillContactMainInfo(cMainData);
+    fillContactPhones(cPhonesData);
+    fillContactAdditionalInfo(cAdditionalData, false);
+    fillContactSecondaryInfo(cSecondaryData);
+  }
+
   public boolean isThereAContact() {
     return isElementPresented(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }

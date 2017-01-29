@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAdditionalData;
 import ru.stqa.pft.addressbook.model.ContactMainData;
@@ -26,9 +27,22 @@ public class ContactModificationTests extends TestBase {
               new ContactSecondaryData("Second Address", "12312312",
                       "Test notes"));
     }
+    int before = app.getContactHelper().getContactCount();
 
     app.getNavigationHelper().gotoContactEditPage();
-    app.getContactHelper().fillContactMainInfo(new ContactMainData(null, "Pavlovich",
+    app.getContactHelper().editContactInfo(
+            new ContactMainData(null, "Pavlovich",
+                    "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
+                    "Suhaya str. - test"),
+            new ContactPhonesData("13579", "+375297777777",
+                    "+375175555555", "11111111"),
+            new ContactAdditionalData("Kostya.test@mail.ru",
+                    "Konstantin.Test2@gmail.com", "none",
+                    "http://www.1crp.by/uz-spec", "1987", "2012", null),
+            new ContactSecondaryData("Second Test Address",
+                    "5557555", "Be healthy"));
+
+    /*app.getContactHelper().fillContactMainInfo(new ContactMainData(null, "Pavlovich",
             "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
             "Suhaya str. - test"));
 
@@ -38,17 +52,16 @@ public class ContactModificationTests extends TestBase {
 
     //Fills Emails, Birthday and Anniversary dates
     app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("Kostya.test@mail.ru",
-
             "Konstantin.Test2@gmail.com", "none",
             "http://www.1crp.by/uz-spec", "1987", "2012", null), false);
 
-    //app.getContactHelper().selectContactGroup();
-
     //Fills Secondary subsections
     app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Test Address",
-            "5557555", "Be healthy"));
+            "5557555", "Be healthy"));*/
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after, before); //check on the number of items in the Contact collection after Contact modification
   }
 }

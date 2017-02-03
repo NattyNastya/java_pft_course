@@ -28,11 +28,12 @@ public class ContactModificationTests extends TestBase {
                       "Test notes"));
     }
     int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().selectContact(before - 1);//Contact selection by index (now it is the penultimate element)
 
     app.getNavigationHelper().gotoContactEditPage();
     app.getContactHelper().editContactInfo(
             new ContactMainData(null, "Pavlovich",
-                    "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
+                    "Mikhin%%%", "Super_duper-test", "The Surgeon", "1st clinic",
                     "Suhaya str. - test"),
             new ContactPhonesData("13579", "+375297777777",
                     "+375175555555", "11111111"),

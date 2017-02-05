@@ -137,9 +137,4 @@ public class ContactHelper extends BaseHelper {
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
-
-  public void selectContact(int index) {
-    wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[8]")).get(index).click();
-
-  }
 }

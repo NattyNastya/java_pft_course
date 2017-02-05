@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by Z51-70 on 05.01.2017.
@@ -39,12 +38,12 @@ public class NavigationHelper extends BaseHelper {
     click(By.linkText("home"));
   }
 
-  public void gotoContactEditPage() {
+  public void gotoContactEditPage(int index) {
     if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
             && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
             && isElementPresented(By.name("update"))) {
       return;
     }
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
+    wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[8]")).get(index).click();
   }
 }

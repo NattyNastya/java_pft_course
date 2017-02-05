@@ -28,8 +28,7 @@ public class ContactDeletionTests extends TestBase {
                       "Test notes"));
     }
     int before = app.getContactHelper().getContactCount();
-
-    app.getNavigationHelper().gotoContactEditPage();
+    app.getNavigationHelper().gotoContactEditPage(before - 1);//Edit Last element
     app.getContactHelper().submitContactDeletion();
     app.getNavigationHelper().gotoHomePage();
     int after = app.getContactHelper().getContactCount();

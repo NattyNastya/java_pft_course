@@ -28,9 +28,7 @@ public class ContactModificationTests extends TestBase {
                       "Test notes"));
     }
     int before = app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContact(before - 1);//Contact selection by index (now it is the penultimate element)
-
-    app.getNavigationHelper().gotoContactEditPage();
+    app.getNavigationHelper().gotoContactEditPage(before - 1);// edit last element
     app.getContactHelper().editContactInfo(
             new ContactMainData(null, "Pavlovich",
                     "Mikhin%%%", "Super_duper-test", "The Surgeon", "1st clinic",
@@ -42,23 +40,6 @@ public class ContactModificationTests extends TestBase {
                     "http://www.1crp.by/uz-spec", "1987", "2012", null),
             new ContactSecondaryData("Second Test Address",
                     "5557555", "Be healthy"));
-
-    /*app.getContactHelper().fillContactMainInfo(new ContactMainData(null, "Pavlovich",
-            "Mikhin", "Super_duper-test", "The Surgeon", "1st clinic",
-            "Suhaya str. - test"));
-
-    //Fills Phone fields,
-    app.getContactHelper().fillContactPhones(new ContactPhonesData("13579", "+375297777777",
-            "+375175555555", "11111111"));
-
-    //Fills Emails, Birthday and Anniversary dates
-    app.getContactHelper().fillContactAdditionalInfo(new ContactAdditionalData("Kostya.test@mail.ru",
-            "Konstantin.Test2@gmail.com", "none",
-            "http://www.1crp.by/uz-spec", "1987", "2012", null), false);
-
-    //Fills Secondary subsections
-    app.getContactHelper().fillContactSecondaryInfo(new ContactSecondaryData("Second Test Address",
-            "5557555", "Be healthy"));*/
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();

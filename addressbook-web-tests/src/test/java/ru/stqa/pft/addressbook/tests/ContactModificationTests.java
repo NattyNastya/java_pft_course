@@ -7,6 +7,8 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
+import java.util.List;
+
 /**
  * Created by Z51-70 on 10.01.2017.
  */
@@ -27,11 +29,12 @@ public class ContactModificationTests extends TestBase {
               new ContactSecondaryData("Second Address", "12312312",
                       "Test notes"));
     }
-    int before = app.getContactHelper().getContactCount();
-    app.getNavigationHelper().gotoContactEditPage(before - 1);// edit last element
+    List<ContactMainData> before = app.getContactHelper().getContactList();
+    //int before = app.getContactHelper().getContactCount();
+    app.getNavigationHelper().gotoContactEditPage(before.size() - 1);// edit last element
     app.getContactHelper().editContactInfo(
             new ContactMainData(null, "Pavlovich",
-                    "Mikhin%%%", "Super_duper-test", "The Surgeon", "1st clinic",
+                    "Mikhin-Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic",
                     "Suhaya str. - test"),
             new ContactPhonesData("13579", "+375297777777",
                     "+375175555555", "11111111"),
@@ -43,7 +46,8 @@ public class ContactModificationTests extends TestBase {
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before); //check on the number of items in the Contact collection after Contact modification
+    List<ContactMainData> after = app.getContactHelper().getContactList();
+    // int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size()); //check on the number of items in the Contact collection after Contact modification
   }
 }

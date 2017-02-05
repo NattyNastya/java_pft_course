@@ -8,13 +8,16 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void ContactCreation() {
 
     //app.getNavigationHelper().gotoHomePage();
-    int before = app.getContactHelper().getContactCount();
+    List<ContactMainData> before = app.getContactHelper().getContactList();
+    //int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoContactCreationForm();
     app.getContactHelper().createContact(
             new ContactMainData("ANNA", null, "Mikhin",
@@ -24,8 +27,9 @@ public class ContactCreationTests extends TestBase {
                     "http://www.1crp.by/", "1988", "2010", "The Surgeons"),
             new ContactSecondaryData("Second Address", "12312312",
                     "Test notes"));
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before + 1); //check on the number of items in the Contact collection after Contact creation
+    List<ContactMainData> after = app.getContactHelper().getContactList();
+    //int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size() + 1); //check on the number of items in the Contact collection after Contact creation
   }
 
 }

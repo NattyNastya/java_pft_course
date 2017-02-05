@@ -7,6 +7,8 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
+import java.util.List;
+
 /**
  * Created by Z51-70 on 10.01.2017.
  */
@@ -27,11 +29,13 @@ public class ContactDeletionTests extends TestBase {
               new ContactSecondaryData("Second Address", "12312312",
                       "Test notes"));
     }
-    int before = app.getContactHelper().getContactCount();
-    app.getNavigationHelper().gotoContactEditPage(before - 1);//Edit Last element
+    List<ContactMainData> before = app.getContactHelper().getContactList();
+    //int before = app.getContactHelper().getContactCount();
+    app.getNavigationHelper().gotoContactEditPage(before.size() - 1);//Edit Last element
     app.getContactHelper().submitContactDeletion();
     app.getNavigationHelper().gotoHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1); //check on the number of items in the Contact collection after Contact deletion
+    List<ContactMainData> after = app.getContactHelper().getContactList();
+    //int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size() - 1); //check on the number of items in the Contact collection after Contact deletion
   }
 }

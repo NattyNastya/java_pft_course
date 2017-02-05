@@ -13,10 +13,10 @@ public class GroupModificationTests extends TestBase {
   public void testGroupModification() {
     app.getNavigationHelper().gotoGroupPage();
     if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("TEST3", "TEST3", "TEST3"));
+      app.getGroupHelper().createGroup(new GroupData("TEST1", "TEST3", "TEST3"));
     }
     int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before - 1);
+    app.getGroupHelper().selectGroup(before - 1);//Group selection by index (now it is the last element)
     app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("The Surgeons", "test header (Logo)", "test footer (comment)"));
     app.getGroupHelper().submitGroupModification();

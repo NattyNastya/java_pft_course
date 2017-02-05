@@ -14,7 +14,7 @@ public class GroupDeletionTests extends TestBase {
       app.getGroupHelper().createGroup(new GroupData("TEST3", "TEST3", "TEST3"));
     }
     int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before - 1);
+    app.getGroupHelper().selectGroup(before - 1);//Group selection by index (now it is the last element)
     app.getGroupHelper().deleteSelectedGroups();
     app.getGroupHelper().returnToGroupPage();
     int after = app.getGroupHelper().getGroupCount();

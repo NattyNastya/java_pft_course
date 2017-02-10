@@ -23,6 +23,16 @@ public class GroupDeletionTests extends TestBase {
     List<GroupData> after = app.getGroupHelper().getGroupList();
     // int after = app.getGroupHelper().getGroupCount();
     Assert.assertEquals(after.size(), before.size() - 1);
+
+    //as we are deleting last entry, so before comparing we need to delete last entry from 'before' collection
+    before.remove(before.size() - 1);
+
+    //cycle takes place for each index of 'before' and 'after' collections and compares them
+    for (int i = 0; i < after.size(); i++) {
+      Assert.assertEquals(before.get(i), after.get(i));
+      System.out.println("Before.get(i) = " + before.get(i));
+      System.out.println("After.get(i) = " + after.get(i));
+    }
   }
 
 }

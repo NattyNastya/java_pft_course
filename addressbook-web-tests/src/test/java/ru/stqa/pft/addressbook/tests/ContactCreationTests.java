@@ -24,7 +24,7 @@ public class ContactCreationTests extends TestBase {
                     "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
             new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
             new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-                    "http://www.1crp.by/", "1988", "2010", "The Surgeons"),
+                    "http://www.1crp.by/", "1988", "2010", "TEST3"),
             new ContactSecondaryData("Second Address", "12312312",
                     "Test notes"));
     List<ContactMainData> after = app.getContactHelper().getContactList();

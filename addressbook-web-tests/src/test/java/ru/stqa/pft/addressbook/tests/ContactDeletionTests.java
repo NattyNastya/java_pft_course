@@ -42,9 +42,7 @@ public class ContactDeletionTests extends TestBase {
     before.remove(before.size() - 1);
 
     //cycle takes place for each index of 'before' and 'after' collections and compares them
-    for (int i =0; i < after.size(); i++) {
-      Assert.assertEquals(before.get(i), after.get(i));
-    }
+    Assert.assertEquals(before, after);
 
   }
 }

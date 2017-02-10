@@ -46,4 +46,36 @@ public class ContactMainData {
   public String getGeneral_address() {
     return general_address;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactMainData that = (ContactMainData) o;
+
+    if (first_name != null ? !first_name.equals(that.first_name) : that.first_name != null) return false;
+    if (middle_name != null ? !middle_name.equals(that.middle_name) : that.middle_name != null) return false;
+    if (last_name != null ? !last_name.equals(that.last_name) : that.last_name != null) return false;
+    return general_address != null ? general_address.equals(that.general_address) : that.general_address == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = first_name != null ? first_name.hashCode() : 0;
+    result = 31 * result + (middle_name != null ? middle_name.hashCode() : 0);
+    result = 31 * result + (last_name != null ? last_name.hashCode() : 0);
+    result = 31 * result + (general_address != null ? general_address.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactMainData{" +
+            "first_name='" + first_name + '\'' +
+            ", middle_name='" + middle_name + '\'' +
+            ", last_name='" + last_name + '\'' +
+            ", general_address='" + general_address + '\'' +
+            '}';
+  }
 }

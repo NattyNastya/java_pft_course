@@ -25,7 +25,7 @@ public class ContactDeletionTests extends TestBase {
                       "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
               new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
               new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-                      "http://www.1crp.by/", "1988", "2010", "The Surgeons"),
+                      "http://www.1crp.by/", "1988", "2010", "TEST3"),
               new ContactSecondaryData("Second Address", "12312312",
                       "Test notes"));
     }
@@ -36,6 +36,15 @@ public class ContactDeletionTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     List<ContactMainData> after = app.getContactHelper().getContactList();
     //int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after.size(), before.size() - 1); //check on the number of items in the Contact collection after Contact deletion
+    Assert.assertEquals(after.size(), before.size() - 1); //check number of items in the Contact collection after Contact deletion
+
+    //as we are deleting last entry, so before comparing we need to delete last entry from 'before' collection
+    before.remove(before.size() - 1);
+
+    //cycle takes place for each index of 'before' and 'after' collections and compares them
+    for (int i =0; i < after.size(); i++) {
+      Assert.assertEquals(before.get(i), after.get(i));
+    }
+
   }
 }

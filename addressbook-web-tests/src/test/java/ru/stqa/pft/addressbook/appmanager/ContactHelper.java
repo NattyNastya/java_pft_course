@@ -144,7 +144,6 @@ public class ContactHelper extends BaseHelper {
 
   public List<ContactMainData> getContactList() {
     List<ContactMainData> contacts = new ArrayList<ContactMainData>();
-    List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[2]"));//by xpath will be found element of ContactMainData class
     for (WebElement element : elements) {
       String name = element.getText();
       ContactMainData contact = new ContactMainData(null, null, name, null, null, null, null);

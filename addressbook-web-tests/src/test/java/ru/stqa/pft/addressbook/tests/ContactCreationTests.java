@@ -19,8 +19,9 @@ public class ContactCreationTests extends TestBase {
     List<ContactMainData> before = app.getContactHelper().getContactList();
     //int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoContactCreationForm();
+
     app.getContactHelper().createContact(
-            new ContactMainData("ANNA", null, "Mikhin",
+            new ContactMainData("Konstantin", null, "Mikhin",
                     "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
             new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
             new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",

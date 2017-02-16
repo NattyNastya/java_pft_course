@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,22 +33,27 @@ public class ContactModificationTests extends TestBase {
     List<ContactMainData> before = app.getContactHelper().getContactList();
     //int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoContactEditPage(before.size() - 1);// edit last element
-    app.getContactHelper().editContactInfo(
-            new ContactMainData(null, "Pavlovich",
-                    "Mikhin-Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic",
-                    "Suhaya str. - test"),
-            new ContactPhonesData("13579", "+375297777777",
-                    "+375175555555", "11111111"),
-            new ContactAdditionalData("Kostya.test@mail.ru",
-                    "Konstantin.Test2@gmail.com", "none",
-                    "http://www.1crp.by/uz-spec", "1987", "2012", null),
-            new ContactSecondaryData("Second Test Address",
-                    "5557555", "Be healthy"));
+
+    ContactMainData mainData = new ContactMainData("Anastasiya", "Anatol\'evna",
+            "Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic",
+            "Suhaya str. - test");
+    ContactPhonesData phonesData = new ContactPhonesData("13579", "+375297777777",
+            "+375175555555", "11111111");
+    ContactAdditionalData additionalData = new ContactAdditionalData("Kostya.test@mail.ru",
+            "Konstantin.Test2@gmail.com", "none",
+            "http://www.1crp.by/uz-spec", "1987", "2012", null);
+    ContactSecondaryData secondaryData = new ContactSecondaryData("Second Test Address",
+            "5557555", "Be healthy");
+    app.getContactHelper().editContactInfo(mainData, phonesData, additionalData, secondaryData);
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
     List<ContactMainData> after = app.getContactHelper().getContactList();
     // int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after.size(), before.size()); //check on the number of items in the Contact collection after Contact modification
+
+    //before.remove(before.size() - 1);
+    //before.add(mainData);
+    //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }

@@ -34,7 +34,7 @@ public class ContactModificationTests extends TestBase {
     //int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoContactEditPage(before.size() - 1);// edit last element
 
-    ContactMainData mainData = new ContactMainData("Anastasiya", "Anatol\'evna",
+    ContactMainData mainData = new ContactMainData(before.get(before.size() - 1).getId(), "Anastasiya", "Anatolievna",
             "Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic",
             "Suhaya str. - test");
     ContactPhonesData phonesData = new ContactPhonesData("13579", "+375297777777",
@@ -44,7 +44,9 @@ public class ContactModificationTests extends TestBase {
             "http://www.1crp.by/uz-spec", "1987", "2012", null);
     ContactSecondaryData secondaryData = new ContactSecondaryData("Second Test Address",
             "5557555", "Be healthy");
+
     app.getContactHelper().editContactInfo(mainData, phonesData, additionalData, secondaryData);
+
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
@@ -52,8 +54,8 @@ public class ContactModificationTests extends TestBase {
     // int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after.size(), before.size()); //check on the number of items in the Contact collection after Contact modification
 
-    //before.remove(before.size() - 1);
-    //before.add(mainData);
-    //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    before.remove(before.size() - 1);
+    before.add(mainData);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }

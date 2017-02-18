@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactMainData {
+  private final String id;
   private final String first_name;
   private final String middle_name;
   private final String last_name;
@@ -10,6 +11,7 @@ public class ContactMainData {
   private final String general_address;
 
   public ContactMainData(String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
+    this.id = null;
     this.first_name = first_name;
     this.middle_name = middle_name;
     this.last_name = last_name;
@@ -17,6 +19,21 @@ public class ContactMainData {
     this.title = title;
     this.contact_company = contact_company;
     this.general_address = general_address;
+  }
+
+  public ContactMainData(String id, String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
+    this.id = id;
+    this.first_name = first_name;
+    this.middle_name = middle_name;
+    this.last_name = last_name;
+    this.nickname = nickname;
+    this.title = title;
+    this.contact_company = contact_company;
+    this.general_address = general_address;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getFirst_name() {
@@ -52,17 +69,19 @@ public class ContactMainData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    ContactMainData that = (ContactMainData) o;
+    ContactMainData mainData = (ContactMainData) o;
 
-    if (first_name != null ? !first_name.equals(that.first_name) : that.first_name != null) return false;
-    if (middle_name != null ? !middle_name.equals(that.middle_name) : that.middle_name != null) return false;
-    if (last_name != null ? !last_name.equals(that.last_name) : that.last_name != null) return false;
-    return general_address != null ? general_address.equals(that.general_address) : that.general_address == null;
+    if (id != null ? !id.equals(mainData.id) : mainData.id != null) return false;
+    if (first_name != null ? !first_name.equals(mainData.first_name) : mainData.first_name != null) return false;
+    if (middle_name != null ? !middle_name.equals(mainData.middle_name) : mainData.middle_name != null) return false;
+    if (last_name != null ? !last_name.equals(mainData.last_name) : mainData.last_name != null) return false;
+    return general_address != null ? general_address.equals(mainData.general_address) : mainData.general_address == null;
   }
 
   @Override
   public int hashCode() {
-    int result = first_name != null ? first_name.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (first_name != null ? first_name.hashCode() : 0);
     result = 31 * result + (middle_name != null ? middle_name.hashCode() : 0);
     result = 31 * result + (last_name != null ? last_name.hashCode() : 0);
     result = 31 * result + (general_address != null ? general_address.hashCode() : 0);
@@ -72,7 +91,8 @@ public class ContactMainData {
   @Override
   public String toString() {
     return "ContactMainData{" +
-            "first_name='" + first_name + '\'' +
+            "id='" + id + '\'' +
+            ", first_name='" + first_name + '\'' +
             ", middle_name='" + middle_name + '\'' +
             ", last_name='" + last_name + '\'' +
             ", general_address='" + general_address + '\'' +

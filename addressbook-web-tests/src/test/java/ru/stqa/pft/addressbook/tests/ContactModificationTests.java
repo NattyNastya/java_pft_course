@@ -34,7 +34,7 @@ public class ContactModificationTests extends TestBase {
     //int before = app.getContactHelper().getContactCount();
     app.getNavigationHelper().gotoContactEditPage(before.size() - 1);// edit last element
 
-    ContactMainData mainData = new ContactMainData(before.get(before.size() - 1).getId(), "Anastasiya", "Anatolievna",
+    ContactMainData mainData = new ContactMainData(before.get(before.size() - 1).getId(), "Anastasiya", null,
             "Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic",
             "Suhaya str. - test");
     ContactPhonesData phonesData = new ContactPhonesData("13579", "+375297777777",

@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactMainData {
-  private final String id;
+  private int id;
   private final String first_name;
   private final String middle_name;
   private final String last_name;
@@ -11,7 +11,7 @@ public class ContactMainData {
   private final String general_address;
 
   public ContactMainData(String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
-    this.id = null;
+    this.id = 0;
     this.first_name = first_name;
     this.middle_name = middle_name;
     this.last_name = last_name;
@@ -21,7 +21,7 @@ public class ContactMainData {
     this.general_address = general_address;
   }
 
-  public ContactMainData(String id, String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
+  public ContactMainData(int id, String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
     this.id = id;
     this.first_name = first_name;
     this.middle_name = middle_name;
@@ -32,8 +32,12 @@ public class ContactMainData {
     this.general_address = general_address;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getFirst_name() {
@@ -71,7 +75,7 @@ public class ContactMainData {
 
     ContactMainData mainData = (ContactMainData) o;
 
-    if (id != null ? !id.equals(mainData.id) : mainData.id != null) return false;
+    if (id != mainData.id) return false;
     if (first_name != null ? !first_name.equals(mainData.first_name) : mainData.first_name != null) return false;
     if (middle_name != null ? !middle_name.equals(mainData.middle_name) : mainData.middle_name != null) return false;
     if (last_name != null ? !last_name.equals(mainData.last_name) : mainData.last_name != null) return false;
@@ -80,7 +84,7 @@ public class ContactMainData {
 
   @Override
   public int hashCode() {
-    int result = id != null ? id.hashCode() : 0;
+    int result = id;
     result = 31 * result + (first_name != null ? first_name.hashCode() : 0);
     result = 31 * result + (middle_name != null ? middle_name.hashCode() : 0);
     result = 31 * result + (last_name != null ? last_name.hashCode() : 0);

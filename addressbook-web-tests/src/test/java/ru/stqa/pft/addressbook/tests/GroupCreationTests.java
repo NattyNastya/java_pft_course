@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
     //  int before = app.getGroupHelper().getGroupCount();
-    GroupData group = new GroupData("TEST3", "TEST3", "TEST3");
+    GroupData group = new GroupData("TEST4", "TEST3", "TEST3");
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     //  int after = app.getGroupHelper().getGroupCount();
@@ -30,14 +30,7 @@ public class GroupCreationTests extends TestBase {
       }
     }*/
 
-    Comparator<? super GroupData> byId = new Comparator<GroupData>() {
-      @Override
-      public int compare(GroupData o1, GroupData o2) {
-        return Integer.compare(o1.getId(), o2.getId());
-      }
-    };
-    int max = after.stream().max(byId).get().getId();
-    group.setId(max);
+    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }

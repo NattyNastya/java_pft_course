@@ -8,7 +8,6 @@ import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -41,7 +40,6 @@ public class ContactModificationTests extends TestBase {
     ContactSecondaryData secondaryData = new ContactSecondaryData("Second Test Address", "5557555", "Be healthy");
 
     app.getContactHelper().editContactInfo(mainData, phonesData, additionalData, secondaryData);
-
 
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();

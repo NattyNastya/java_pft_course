@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -30,6 +29,7 @@ public class GroupCreationTests extends TestBase {
       }
     }*/
 
+    /* Look for max ID(it is new created group), or if we need sorting we can next: (in GroupData class) this.id = Integer.MAX_VALUE (instead of 0) */
     group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
 

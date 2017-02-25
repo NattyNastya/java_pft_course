@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -12,27 +13,28 @@ import java.util.List;
  */
 public class GroupModificationTests extends TestBase {
 
-  @Test
-  public void testGroupModification() {
+  @BeforeMethod
+  public void ensurePreconditions() {
     app.getNavigationHelper().gotoGroupPage();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("TEST1 - the first added group", "TEST3", "TEST3"));
     }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    // int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before.size() - 1);//Group selection by index (now it is the last element)
-    app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(), "Anesthesiologist", "test header (Logo)", "test footer (comment)");
-    //Where before.get(before.size() - 1).getId() — ID which was before the modification
+  }
 
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().submitGroupModification();
-    app.getGroupHelper().returnToGroupPage();
+  @Test
+  public void testGroupModification() {
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    int index = before.size() - 1;// it's group's index which we are going to modify
+    GroupData group = new GroupData(before.get(index).getId(), "Anesthesiologist", "test header (Logo)", "test footer (comment)");
+    //Where before.get(index).getId() — ID which was before the modification
+    // int before = app.getGroupHelper().getGroupCount();
+
+    app.getGroupHelper().modifyGroup(index, group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     // int after = app.getGroupHelper().getGroupCount();
     Assert.assertEquals(before.size(), after.size());
 
-    before.remove(before.size() - 1);//remove last element to predict the expected result and add to this place modified group
+    before.remove(index);//removes last element to predict the expected result and add to this place modified group
     before.add(group);//replaced last group with modified data
 
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());

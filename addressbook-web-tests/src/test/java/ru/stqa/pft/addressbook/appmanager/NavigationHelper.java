@@ -22,28 +22,19 @@ public class NavigationHelper extends BaseHelper {
     click(By.linkText("groups"));
   }
 
-  public void gotoContactCreationForm() {
-    if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
-            && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
-            && isElementPresented(By.name("submit"))) {
-      return;
-    }
-    click(By.linkText("add new"));
-  }
-
-  public void gotoHomePage() {
+  public void homePage() {
     if (isElementPresented(By.id("maintable"))) {
       return;
     }
     click(By.linkText("home"));
   }
 
-  public void gotoContactEditPage(int index) {
+  public void contactCreationForm() {
     if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
             && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
-            && isElementPresented(By.name("update"))) {
+            && isElementPresented(By.name("submit"))) {
       return;
     }
-    wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[8]")).get(index).click();
+    click(By.linkText("add new"));
   }
 }

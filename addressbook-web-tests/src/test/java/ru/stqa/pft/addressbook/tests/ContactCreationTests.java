@@ -14,11 +14,9 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void ContactCreation() {
-
-    //app.getNavigationHelper().gotoHomePage();
-    List<ContactMainData> before = app.getContactHelper().getContactList();
-    //int before = app.getContactHelper().getContactCount();
-    app.getNavigationHelper().gotoContactCreationForm();
+    app.goTo().homePage();
+    List<ContactMainData> before = app.contact().list();
+    //int before = app.contact().count();
 
     ContactMainData mainData = new ContactMainData("Konstantin", null, "Mikhin",
             "Super_duper", "Surgeons", "1st clinic", "Suhaya str.");
@@ -28,10 +26,11 @@ public class ContactCreationTests extends TestBase {
     ContactSecondaryData secondaryData = new ContactSecondaryData("Second Address", "12312312",
             "Test notes");
 
-    app.getContactHelper().createContact(mainData, phonesData, additionalData, secondaryData);
-    List<ContactMainData> after = app.getContactHelper().getContactList();
-    //int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after.size(), before.size() + 1); //check on the number of items in the Contact collection after Contact creation
+    app.goTo().contactCreationForm();
+    app.contact().create(mainData, phonesData, additionalData, secondaryData);
+    List<ContactMainData> after = app.contact().list();
+    //int after = app.contact().count();
+    Assert.assertEquals(after.size(), before.size() + 1); //check on the number of items in the contact collection after contact creation
 
     //Look for MAX id value in the `after` collection
     /*int max = 0;

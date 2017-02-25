@@ -26,7 +26,7 @@ public class ContactHelper extends BaseHelper {
     super(wd);
   }
 
-  // Fill in New Contact form
+  // Fill in New contact form
   public void fillContactMainInfo(ContactMainData contactMainData) {
     clickClearAndSendkeys(name("firstname"), contactMainData.getFirst_name());
 
@@ -107,15 +107,28 @@ public class ContactHelper extends BaseHelper {
     wd.findElement(xpath("//*[@id='content']/form/input[@value=\"Update\"]")).click();
   }
 
-  public void submitContactDeletion() {
+  public void submitDeletion() {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
   }
 
-  public void createContact(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                            ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+  public void create(ContactMainData cMainData, ContactPhonesData cPhonesData,
+                     ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactInfo(cMainData, cPhonesData, cAdditionalData, cSecondaryData);
     submitContactCreation();
     returnToContactPage();
+  }
+
+  public void modifyContact(int index, ContactMainData mainData, ContactPhonesData phonesData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
+    editPage(index);
+    edit(mainData, phonesData, additionalData, secondaryData);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void delete(int index) {
+    editPage(index);
+    submitDeletion();
+    returnToHomePage();
   }
 
   public void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
@@ -126,23 +139,39 @@ public class ContactHelper extends BaseHelper {
     fillContactSecondaryInfo(cSecondaryData);
   }
 
-  public void editContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                              ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+  public void edit(ContactMainData cMainData, ContactPhonesData cPhonesData,
+                   ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactMainInfo(cMainData);
     fillContactPhones(cPhonesData);
     fillContactAdditionalInfo(cAdditionalData, false);
     fillContactSecondaryInfo(cSecondaryData);
   }
 
+  public void returnToHomePage() {
+    if (isElementPresented(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
+  }
+
+  public void editPage(int index) {
+    if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
+            && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
+            && isElementPresented(By.name("update"))) {
+      return;
+    }
+    wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[8]")).get(index).click();
+  }
+
   public boolean isThereAContact() {
     return isElementPresented(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
   }
 
-  public int getContactCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactMainData> getContactList() {
+  public List<ContactMainData> list() {
     List<ContactMainData> contacts = new ArrayList<ContactMainData>();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
     for (WebElement element : elements) {

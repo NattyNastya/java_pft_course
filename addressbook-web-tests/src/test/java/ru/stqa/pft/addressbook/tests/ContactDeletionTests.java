@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactAdditionalData;
 import ru.stqa.pft.addressbook.model.ContactMainData;
@@ -14,13 +15,12 @@ import java.util.List;
  */
 public class ContactDeletionTests extends TestBase {
 
-  @Test
-  public void testContactDeletion() {
-    app.getNavigationHelper().gotoHomePage();
-
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().gotoContactCreationForm();
-      app.getContactHelper().createContact(
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0) {
+      app.goTo().contactCreationForm();
+      app.contact().create(
               new ContactMainData("ANNA", null, "Mikhin",
                       "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
               new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
@@ -29,14 +29,17 @@ public class ContactDeletionTests extends TestBase {
               new ContactSecondaryData("Second Address", "12312312",
                       "Test notes"));
     }
-    List<ContactMainData> before = app.getContactHelper().getContactList();
-    //int before = app.getContactHelper().getContactCount();
-    app.getNavigationHelper().gotoContactEditPage(before.size() - 1);//Edit Last element
-    app.getContactHelper().submitContactDeletion();
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactMainData> after = app.getContactHelper().getContactList();
-    //int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after.size(), before.size() - 1); //check number of items in the Contact collection after Contact deletion
+  }
+
+  @Test//(enabled = false)
+  public void testContactDeletion() {
+    List<ContactMainData> before = app.contact().list();
+    //int before = app.contact().count();
+    int index = before.size() - 1; //It's Last element in the Contact list
+    app.contact().delete(index);
+    List<ContactMainData> after = app.contact().list();
+    //int after = app.contact().count();
+    Assert.assertEquals(after.size(), before.size() - 1); //check number of items in the contact collection after contact deletion
 
     //as we are deleting last entry, so before comparing we need to delete last entry from 'before' collection
     before.remove(before.size() - 1);

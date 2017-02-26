@@ -182,7 +182,7 @@ public class ContactHelper extends BaseHelper {
       String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactMainData contact = new ContactMainData(id, firstname, null, lastname, null, null, null, address);
+      ContactMainData contact = new ContactMainData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
       contacts.add(contact);
     }
     return contacts;

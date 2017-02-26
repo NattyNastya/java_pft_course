@@ -21,13 +21,10 @@ public class ContactDeletionTests extends TestBase {
     if (app.contact().list().size() == 0) {
       app.goTo().contactCreationForm();
       app.contact().create(
-              new ContactMainData("ANNA", null, "Mikhin",
-                      "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
-              new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
-              new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-                      "http://www.1crp.by/", "1988", "2010", "TEST3"),
-              new ContactSecondaryData("Second Address", "12312312",
-                      "Test notes"));
+              new ContactMainData().withFirst_name("ANNA").withLast_name("Mikhin").withNickname("Super_duper").withTitle("Surgeons").withContact_company("1st clinic").withGeneral_address("Suhaya str."),
+              new ContactPhonesData().withHome_phone("-").withMobile_phone("+375290000000").withWork_phone("+375170000000").withFax("-"),
+              new ContactAdditionalData().withEmail("K.test@mail.ru").withEmail_2("K.Test2@gmail.com").withEmail_3("-").withHomepage_link("http://www.1crp.by/").withBirthYear("1988").withAnniverYear("2010").withGroup("TEST3"),
+              new ContactSecondaryData().withAddress_2("Second Address").withPhone_2("12312312").withNotes("Test notes"));
     }
   }
 

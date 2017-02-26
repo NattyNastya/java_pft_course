@@ -1,23 +1,47 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactAdditionalData {
-  private final String email;
-  private final String email_2;
-  private final String email_3;
-  private final String homepage_link;
-  private final String birthYear;
-  private final String anniverYear;
-  private final String group;
+  private String email;
+  private String email_2;
+  private String email_3;
+  private String homepage_link;
+  private String birthYear;
+  private String anniverYear;
+  private String group;
 
-  public ContactAdditionalData(String email, String email_2, String email_3, String homepage_link, String birthYear,
-                               String anniverYear, String group) {
+  public ContactAdditionalData withEmail(String email) {
     this.email = email;
+    return this;
+  }
+
+  public ContactAdditionalData withEmail_2(String email_2) {
     this.email_2 = email_2;
+    return this;
+  }
+
+  public ContactAdditionalData withEmail_3(String email_3) {
     this.email_3 = email_3;
+    return this;
+  }
+
+  public ContactAdditionalData withHomepage_link(String homepage_link) {
     this.homepage_link = homepage_link;
+    return this;
+  }
+
+  public ContactAdditionalData withBirthYear(String birthYear) {
     this.birthYear = birthYear;
+    return this;
+  }
+
+  public ContactAdditionalData withAnniverYear(String anniverYear) {
     this.anniverYear = anniverYear;
+    return this;
+  }
+
+  public ContactAdditionalData withGroup(String group) {
     this.group = group;
+    return this;
   }
 
   public String getEmail() {

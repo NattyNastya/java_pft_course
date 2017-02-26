@@ -17,7 +17,7 @@ public class GroupModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().list().size() == 0) {
-      app.group().create(new GroupData("TEST1 - the first added group", "TEST3", "TEST3"));
+      app.group().create(new GroupData().withName("TEST1 - the first added group").withHeader("TEST3").withFooter("TEST3"));
     }
   }
 
@@ -25,7 +25,7 @@ public class GroupModificationTests extends TestBase {
   public void testGroupModification() {
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;// it's group's index which we are going to modify
-    GroupData group = new GroupData(before.get(index).getId(), "TEST3", "test header (Logo)", "test footer (comment)");
+    GroupData group = new GroupData().withId(before.get(index).getId()).withName("TEST3").withHeader("test header (Logo)").withFooter("test footer (comment)");
     //Where before.get(index).getId() — ID which was before the modification
     // int before = app.group().count();
 

@@ -1,43 +1,57 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactMainData {
-  private int id;
-  private final String first_name;
-  private final String middle_name;
-  private final String last_name;
-  private final String nickname;
-  private final String title;
-  private final String contact_company;
-  private final String general_address;
+  private int id = 0;
+  private String first_name;
+  private String middle_name;
+  private String last_name;
+  private String nickname;
+  private String title;
+  private String contact_company;
+  private String general_address;
 
-  public ContactMainData(String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
-    this.id = 0;
-    this.first_name = first_name;
-    this.middle_name = middle_name;
-    this.last_name = last_name;
-    this.nickname = nickname;
-    this.title = title;
-    this.contact_company = contact_company;
-    this.general_address = general_address;
+  public ContactMainData withId(int id) {
+    this.id = id;
+    return this;
   }
 
-  public ContactMainData(int id, String first_name, String middle_name, String last_name, String nickname, String title, String contact_company, String general_address) {
-    this.id = id;
+  public ContactMainData withFirst_name(String first_name) {
     this.first_name = first_name;
+    return this;
+  }
+
+  public ContactMainData withMiddle_name(String middle_name) {
     this.middle_name = middle_name;
+    return this;
+  }
+
+  public ContactMainData withLast_name(String last_name) {
     this.last_name = last_name;
+    return this;
+  }
+
+  public ContactMainData withNickname(String nickname) {
     this.nickname = nickname;
+    return this;
+  }
+
+  public ContactMainData withTitle(String title) {
     this.title = title;
+    return this;
+  }
+
+  public ContactMainData withContact_company(String contact_company) {
     this.contact_company = contact_company;
+    return this;
+  }
+
+  public ContactMainData withGeneral_address(String general_address) {
     this.general_address = general_address;
+    return this;
   }
 
   public int getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getFirst_name() {

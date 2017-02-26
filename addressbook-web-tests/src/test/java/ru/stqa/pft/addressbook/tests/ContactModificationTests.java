@@ -22,13 +22,10 @@ public class ContactModificationTests extends TestBase {
     if (app.contact().list().size() == 0) {
       app.goTo().contactCreationForm();
       app.contact().create(
-              new ContactMainData("ANNA", null, "Mikhin",
-                      "Super_duper", "Surgeons", "1st clinic", "Suhaya str."),
-              new ContactPhonesData("-", "+375290000000", "+375170000000", "-"),
-              new ContactAdditionalData("K.test@mail.ru", "K.Test2@gmail.com", "-",
-                      "http://www.1crp.by/", "1988", "2010", "Anesthesiologist"),
-              new ContactSecondaryData("Second Address", "12312312",
-                      "Test notes"));
+              new ContactMainData().withFirst_name("ANNA").withLast_name("Mikhin").withNickname("Super_duper").withTitle("Surgeons").withContact_company("1st clinic").withGeneral_address("Suhaya str."),
+              new ContactPhonesData().withHome_phone("-").withMobile_phone("+375290000000").withWork_phone("+375170000000").withFax("-"),
+              new ContactAdditionalData().withEmail("K.test@mail.ru").withEmail_2("K.Test2@gmail.com").withEmail_3("-").withHomepage_link("http://www.1crp.by/").withBirthYear("1988").withAnniverYear("2010").withGroup("TEST3"),
+              new ContactSecondaryData().withAddress_2("Second Address").withPhone_2("12312312").withNotes("Test notes"));
     }
   }
 
@@ -38,10 +35,10 @@ public class ContactModificationTests extends TestBase {
     //int before = app.contact().count();
     int index = before.size() - 1; // last element in the contact list
 
-    ContactMainData mainData = new ContactMainData(before.get(before.size() - 1).getId(), "Anastasiya", null, "Khamitsevich", "Super_duper-test", "The Surgeon", "1st clinic", "Suhaya str. - test");
-    ContactPhonesData phonesData = new ContactPhonesData("13579", "+375297777777", "+375175555555", "11111111");
-    ContactAdditionalData additionalData = new ContactAdditionalData("Kostya.test@mail.ru", "Konstantin.Test2@gmail.com", "none", "http://www.1crp.by/uz-spec", "1987", "2012", null);
-    ContactSecondaryData secondaryData = new ContactSecondaryData("Second Test Address", "5557555", "Be healthy");
+    ContactMainData mainData = new ContactMainData().withId(before.get(before.size() - 1).getId()).withFirst_name("Anastasiya").withLast_name("Khamitsevich").withNickname("Super_duper-test").withTitle("The Surgeon").withContact_company("1st clinic").withGeneral_address("Suhaya str. - test");
+    ContactPhonesData phonesData = new ContactPhonesData().withHome_phone("13579").withMobile_phone("+375297777777").withWork_phone("+375175555555").withFax("11111111");
+    ContactAdditionalData additionalData = new ContactAdditionalData().withEmail("Kostya.test@mail.ru").withEmail_2("Konstantin.Test2@gmail.com").withEmail_3("none").withHomepage_link("http://www.1crp.by/uz-spec").withBirthYear("1987").withAnniverYear("2012");
+    ContactSecondaryData secondaryData = new ContactSecondaryData().withAddress_2("Second Test Address").withPhone_2("5557555").withNotes("Be healthy");
 
     app.contact().modifyContact(index, mainData, phonesData, additionalData, secondaryData);
     List<ContactMainData> after = app.contact().list();

@@ -14,7 +14,7 @@ public class GroupCreationTests extends TestBase {
     app.goTo().groupPage();
     List<GroupData> before = app.group().list();
     //int before = app.group().count();
-    GroupData group = new GroupData("TEST3", "TEST3", "TEST3");
+    GroupData group = new GroupData().withName("TEST3").withHeader("TEST3").withFooter("TEST3");
     app.group().create(group);
     List<GroupData> after = app.group().list();
     //  int after = app.group().count();
@@ -30,7 +30,7 @@ public class GroupCreationTests extends TestBase {
     }*/
 
     /* Look for max ID(it is new created group), or if we need sorting we can next: (in GroupData class) this.id = Integer.MAX_VALUE (instead of 0) */
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);

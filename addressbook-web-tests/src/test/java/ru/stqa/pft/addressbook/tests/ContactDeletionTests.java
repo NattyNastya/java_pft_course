@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Z51-70 on 10.01.2017.
@@ -18,7 +18,7 @@ public class ContactDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.goTo().contactCreationForm();
       app.contact().create(
               new ContactMainData().withFirst_name("ANNA").withLast_name("Mikhin").withNickname("Super_duper").withTitle("Surgeons").withContact_company("1st clinic").withGeneral_address("Suhaya str."),
@@ -30,16 +30,14 @@ public class ContactDeletionTests extends TestBase {
 
   @Test//(enabled = false)
   public void testContactDeletion() {
-    List<ContactMainData> before = app.contact().list();
-    //int before = app.contact().count();
-    int index = before.size() - 1; //It's Last element in the Contact list
-    app.contact().delete(index);
-    List<ContactMainData> after = app.contact().list();
-    //int after = app.contact().count();
+    Set<ContactMainData> before = app.contact().all();
+    ContactMainData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
+    Set<ContactMainData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1); //check number of items in the contact collection after contact deletion
 
-    //as we are deleting last entry, so before comparing we need to delete last entry from 'before' collection
-    before.remove(before.size() - 1);
+    //as we are deleting some entry, so before comparing we need to delete this entry from 'before' collection
+    before.remove(deletedContact);
 
     //cycle takes place for each index of 'before' and 'after' collections and compares them
     Assert.assertEquals(before, after);

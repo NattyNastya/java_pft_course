@@ -7,15 +7,14 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void ContactCreation() {
     app.goTo().homePage();
-    List<ContactMainData> before = app.contact().list();
+    Set<ContactMainData> before = app.contact().all();
     //int before = app.contact().count();
 
     ContactMainData mainData = new ContactMainData().withFirst_name("Konstantin").withLast_name("Mikhin").withNickname("Super_duper").withTitle("Surgeons").withContact_company("1st clinic").withGeneral_address("Suhaya str.");
@@ -25,19 +24,12 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().contactCreationForm();
     app.contact().create(mainData, phonesData, additionalData, secondaryData);
-    List<ContactMainData> after = app.contact().list();
-    //int after = app.contact().count();
+    Set<ContactMainData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() + 1); //check on the number of items in the contact collection after contact creation
 
-    mainData.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    mainData.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
     before.add(mainData);
-
-    Comparator<? super ContactMainData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
-
-    //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 
 }

@@ -10,12 +10,11 @@ import ru.stqa.pft.addressbook.model.ContactMainData;
 import ru.stqa.pft.addressbook.model.ContactPhonesData;
 import ru.stqa.pft.addressbook.model.ContactSecondaryData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static org.openqa.selenium.By.linkText;
-import static org.openqa.selenium.By.name;
-import static org.openqa.selenium.By.xpath;
+import static org.openqa.selenium.By.*;
 
 /**
  * Created by Z51-70 on 05.01.2017.
@@ -118,15 +117,15 @@ public class ContactHelper extends BaseHelper {
     returnToContactPage();
   }
 
-  public void modifyContact(int index, ContactMainData mainData, ContactPhonesData phonesData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
-    editPage(index);
+  public void modifyContact(ContactMainData mainData, ContactPhonesData phonesData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
+    editContactById(mainData.getId());
     edit(mainData, phonesData, additionalData, secondaryData);
     submitContactModification();
     returnToHomePage();
   }
 
-  public void delete(int index) {
-    editPage(index);
+  public void delete(ContactMainData contact) {
+    editContactById(contact.getId());
     submitDeletion();
     returnToHomePage();
   }
@@ -154,13 +153,22 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("home"));
   }
 
-  public void editPage(int index) {
+  public void editContact(int index) {
     if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
             && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
             && isElementPresented(By.name("update"))) {
       return;
     }
     wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr/td[8]")).get(index).click();
+  }
+
+  public void editContactById(int id) {
+    if (isElementPresented(By.xpath(".//*[@id='content']/h1"))
+            && wd.findElement(By.xpath(".//*[@id='content']/h1")).getText().equals("Edit / add address book entry")
+            && isElementPresented(By.name("update"))) {
+      return;
+    }
+    wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id + "']")).click();
   }
 
   public boolean isThereAContact() {
@@ -171,8 +179,8 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactMainData> list() {
-    List<ContactMainData> contacts = new ArrayList<ContactMainData>();
+  public Set<ContactMainData> all() {
+    Set<ContactMainData> contacts = new HashSet<ContactMainData>();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));

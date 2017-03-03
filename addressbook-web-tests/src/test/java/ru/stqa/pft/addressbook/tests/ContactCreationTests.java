@@ -1,20 +1,22 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAdditionalData;
-import ru.stqa.pft.addressbook.model.ContactMainData;
-import ru.stqa.pft.addressbook.model.ContactPhonesData;
-import ru.stqa.pft.addressbook.model.ContactSecondaryData;
+import ru.stqa.pft.addressbook.model.*;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void ContactCreation() {
     app.goTo().homePage();
-    Set<ContactMainData> before = app.contact().all();
+    Contacts before = app.contact().all();
     //int before = app.contact().count();
 
     ContactMainData mainData = new ContactMainData().withFirst_name("Konstantin").withLast_name("Mikhin").withNickname("Super_duper").withTitle("Surgeons").withContact_company("1st clinic").withGeneral_address("Suhaya str.");
@@ -24,12 +26,9 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().contactCreationForm();
     app.contact().create(mainData, phonesData, additionalData, secondaryData);
-    Set<ContactMainData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() + 1); //check on the number of items in the contact collection after contact creation
-
-    mainData.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-    before.add(mainData);
-    Assert.assertEquals(before, after);
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() + 1)); //check on the number of items in the contact collection after contact creation
+    assertThat(after, equalTo(before.withAdded(mainData.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
 }

@@ -5,10 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.ContactAdditionalData;
-import ru.stqa.pft.addressbook.model.ContactMainData;
-import ru.stqa.pft.addressbook.model.ContactPhonesData;
-import ru.stqa.pft.addressbook.model.ContactSecondaryData;
+import ru.stqa.pft.addressbook.model.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -179,8 +176,8 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<ContactMainData> all() {
-    Set<ContactMainData> contacts = new HashSet<ContactMainData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));

@@ -1,14 +1,16 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAdditionalData;
-import ru.stqa.pft.addressbook.model.ContactMainData;
-import ru.stqa.pft.addressbook.model.ContactPhonesData;
-import ru.stqa.pft.addressbook.model.ContactSecondaryData;
+import ru.stqa.pft.addressbook.model.*;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Z51-70 on 10.01.2017.
@@ -30,7 +32,7 @@ public class ContactModificationTests extends TestBase {
 
   @Test//(enabled = false)
   public void testContactModification() {
-    Set<ContactMainData> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactMainData modifiedContact = before.iterator().next();
 
     ContactMainData mainData = new ContactMainData().withId(modifiedContact.getId()).withFirst_name("Anastasiya").withLast_name("Khamitsevich").withNickname("Super_duper-test").withTitle("The Surgeon").withContact_company("1st clinic").withGeneral_address("Suhaya str. - test");
@@ -39,11 +41,8 @@ public class ContactModificationTests extends TestBase {
     ContactSecondaryData secondaryData = new ContactSecondaryData().withAddress_2("Second Test Address").withPhone_2("5557555").withNotes("Be healthy");
 
     app.contact().modifyContact(mainData, phonesData, additionalData, secondaryData);
-    Set<ContactMainData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size()); //check on the number of items in the contact collection after contact modification
-
-    before.remove(modifiedContact);
-    before.add(mainData);
-    Assert.assertEquals(before, after);
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size())); //check on the number of items in the contact collection after contact modification
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(mainData)));
   }
 }

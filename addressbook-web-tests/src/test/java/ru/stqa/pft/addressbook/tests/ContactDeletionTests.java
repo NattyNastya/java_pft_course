@@ -1,14 +1,11 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactAdditionalData;
-import ru.stqa.pft.addressbook.model.ContactMainData;
-import ru.stqa.pft.addressbook.model.ContactPhonesData;
-import ru.stqa.pft.addressbook.model.ContactSecondaryData;
+import ru.stqa.pft.addressbook.model.*;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Z51-70 on 10.01.2017.
@@ -30,17 +27,14 @@ public class ContactDeletionTests extends TestBase {
 
   @Test//(enabled = false)
   public void testContactDeletion() {
-    Set<ContactMainData> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactMainData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-    Set<ContactMainData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() - 1); //check number of items in the contact collection after contact deletion
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() - 1)); //check number of items in the contact collection after contact deletion
 
     //as we are deleting some entry, so before comparing we need to delete this entry from 'before' collection
-    before.remove(deletedContact);
-
-    //cycle takes place for each index of 'before' and 'after' collections and compares them
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.without(deletedContact)));
 
   }
 }

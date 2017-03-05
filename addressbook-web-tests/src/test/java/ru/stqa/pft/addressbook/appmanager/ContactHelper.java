@@ -7,9 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.openqa.selenium.By.*;
 
@@ -79,10 +77,6 @@ public class ContactHelper extends BaseHelper {
     }
   }
 
-  /*public void selectContactGroup() {
-    dropdownMenuSelection(xpath("//form/select[5]"),"5");
-  }*/
-
   public void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
     clickClearAndSendkeys(name("address2"), contactSecondaryData.getAddress_2());
 
@@ -111,6 +105,7 @@ public class ContactHelper extends BaseHelper {
                      ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactInfo(cMainData, cPhonesData, cAdditionalData, cSecondaryData);
     submitContactCreation();
+    contactCach = null;
     returnToContactPage();
   }
 
@@ -118,12 +113,14 @@ public class ContactHelper extends BaseHelper {
     editContactById(mainData.getId());
     edit(mainData, phonesData, additionalData, secondaryData);
     submitContactModification();
+    contactCach = null;
     returnToHomePage();
   }
 
   public void delete(ContactMainData contact) {
     editContactById(contact.getId());
     submitDeletion();
+    contactCach = null;
     returnToHomePage();
   }
 
@@ -176,8 +173,13 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCach = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCach != null) {
+      return new Contacts(contactCach);
+    }
+    contactCach = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -188,8 +190,8 @@ public class ContactHelper extends BaseHelper {
       String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
       ContactMainData contact = new ContactMainData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
-      contacts.add(contact);
+      contactCach.add(contact);
     }
-    return contacts;
+    return new Contacts(contactCach);
   }
 }

@@ -36,8 +36,8 @@ public class ContactModificationTests extends TestBase {
     ContactSecondaryData secondaryData = new ContactSecondaryData().withAddress_2("Second Test Address").withPhone_2("5557555").withNotes("Be healthy");
 
     app.contact().modifyContact(mainData, phonesData, additionalData, secondaryData);
+    assertThat(app.contact().count(), equalTo(before.size())); //check on the number of items in the contact collection after contact modification
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size())); //check on the number of items in the contact collection after contact modification
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(mainData)));
   }
 }

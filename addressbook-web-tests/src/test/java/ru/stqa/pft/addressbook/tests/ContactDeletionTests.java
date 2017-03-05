@@ -30,8 +30,8 @@ public class ContactDeletionTests extends TestBase {
     Contacts before = app.contact().all();
     ContactMainData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
+    assertThat(app.contact().count(), equalTo(before.size() - 1)); //check number of items in the contact collection after contact deletion
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() - 1)); //check number of items in the contact collection after contact deletion
 
     //as we are deleting some entry, so before comparing we need to delete this entry from 'before' collection
     assertThat(after, equalTo(before.without(deletedContact)));

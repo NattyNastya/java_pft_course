@@ -1,12 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.*;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase {
 
   @Test
-  public void ContactCreation() {
+  public void testContactCreation() {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     //int before = app.contact().count();
@@ -29,6 +24,25 @@ public class ContactCreationTests extends TestBase {
     Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size() + 1)); //check on the number of items in the contact collection after contact creation
     assertThat(after, equalTo(before.withAdded(mainData.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+  }
+
+  @Test
+  public void testBadContactCreation() {
+    app.goTo().homePage();
+    Contacts before = app.contact().all();
+    //int before = app.contact().count();
+
+    ContactMainData mainData = new ContactMainData().withFirst_name("Konstantin'").withLast_name(null).withNickname(null).withTitle(null).withContact_company(null).withGeneral_address(null);
+    ContactPhonesData phonesData = new ContactPhonesData().withHome_phone(null).withMobile_phone(null).withWork_phone(null).withFax(null);
+    ContactAdditionalData additionalData = new ContactAdditionalData().withEmail(null).withEmail_2(null).withEmail_3(null).withHomepage_link(null).withBirthYear(null).withAnniverYear(null).withGroup("TEST3");
+    ContactSecondaryData secondaryData = new ContactSecondaryData().withAddress_2(null).withPhone_2(null).withNotes(null);
+
+    app.goTo().contactCreationForm();
+    app.contact().create(mainData, phonesData, additionalData, secondaryData);
+    assertThat(app.contact().count(), equalTo(before.size())); //check on the number of items in the contact collection after contact creation
+    Contacts after = app.contact().all();
+
+    assertThat(after, equalTo(before));
   }
 
 }

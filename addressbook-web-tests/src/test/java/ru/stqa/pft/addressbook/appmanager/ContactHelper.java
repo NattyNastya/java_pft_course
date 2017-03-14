@@ -174,7 +174,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   private Contacts contactCach = null;
-
+  
   public Contacts all() {
     if (contactCach != null) {
       return new Contacts(contactCach);
@@ -187,7 +187,7 @@ public class ContactHelper extends BaseHelper {
       String firstname = cells.get(2).getText();
       String address = cells.get(3).getText();
       String allEmails = cells.get(4).getText();
-      String allPhones = cells.get(5).getText();
+      String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
       ContactMainData contact = new ContactMainData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
       contactCach.add(contact);

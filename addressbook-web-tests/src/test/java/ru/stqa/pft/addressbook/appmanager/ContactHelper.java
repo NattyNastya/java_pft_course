@@ -21,7 +21,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   // Fill in New contact form
-  public void fillContactMainInfo(ContactMainData contactMainData) {
+  public void fillContactMainInfo(ContactMainData contactMainData, boolean creation) {
     clickClearAndSendkeys(name("firstname"), contactMainData.getFirst_name());
 
     clickClearAndSendkeys(name("middlename"), contactMainData.getMiddle_name());
@@ -51,31 +51,18 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("phone2"), contactMainData.getPhone_2());
 
     clickClearAndSendkeys(name("notes"), contactMainData.getNotes());
-  }
 
-  public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData, boolean creation) {
-    clickClearAndSendkeys(name("email"), contactAdditionalData.getEmail());
+    clickClearAndSendkeys(name("email"), contactMainData.getEmail());
 
-    clickClearAndSendkeys(name("email2"), contactAdditionalData.getEmail_2());
+    clickClearAndSendkeys(name("email2"), contactMainData.getEmail_2());
 
-    clickClearAndSendkeys(name("email3"), contactAdditionalData.getEmail_3());
+    clickClearAndSendkeys(name("email3"), contactMainData.getEmail_3());
 
-    clickClearAndSendkeys(name("homepage"), contactAdditionalData.getHomepage_link());
-
-    //fillContactBirthday
-    dropdownMenuSelection(xpath("//form/select[1]"),"19"); //select Birth Day
-
-    dropdownMenuSelection(xpath("//form/select[2]"),"March"); //select Birth Month
-    clickClearAndSendkeys(name("byear"), contactAdditionalData.getBirthYear());
-
-    //Anniversary
-    dropdownMenuSelection(xpath("//form/select[3]"),"30"); //select Anniversary Day
-    dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
-    clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
+    clickClearAndSendkeys(name("homepage"), contactMainData.getHomepage_link());
 
     //creation = true -> select Group exist on the page, else - does not exist
     if (creation) {
-      new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactAdditionalData.getGroup());
+      new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactMainData.getGroup());
     } else {
       Assert.assertFalse(isElementPresented(name("new_group"))); //check that element shouldn't exist
     }
@@ -97,16 +84,16 @@ public class ContactHelper extends BaseHelper {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
   }
 
-  public void create(ContactMainData cMainData, ContactAdditionalData cAdditionalData) {
-    fillContactInfo(cMainData, cAdditionalData);
+  public void create(ContactMainData cMainData) {
+    fillContactInfo(cMainData);
     submitContactCreation();
     contactCach = null;
     returnToContactPage();
   }
 
-  public void modifyContact(ContactMainData mainData, ContactAdditionalData additionalData) {
+  public void modifyContact(ContactMainData mainData) {
     editContactById(mainData.getId());
-    edit(mainData, additionalData);
+    edit(mainData);
     submitContactModification();
     contactCach = null;
     returnToHomePage();
@@ -119,14 +106,12 @@ public class ContactHelper extends BaseHelper {
     returnToHomePage();
   }
 
-  public void fillContactInfo(ContactMainData cMainData, ContactAdditionalData cAdditionalData) {
-    fillContactMainInfo(cMainData);
-    fillContactAdditionalInfo(cAdditionalData, true);
+  public void fillContactInfo(ContactMainData cMainData) {
+    fillContactMainInfo(cMainData, true);
   }
 
-  public void edit(ContactMainData cMainData, ContactAdditionalData cAdditionalData) {
-    fillContactMainInfo(cMainData);
-    fillContactAdditionalInfo(cAdditionalData, false);
+  public void edit(ContactMainData cMainData) {
+    fillContactMainInfo(cMainData, false);
   }
 
   public void returnToHomePage() {

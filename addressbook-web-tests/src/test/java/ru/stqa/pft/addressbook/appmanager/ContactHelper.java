@@ -21,7 +21,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   // Fill in New contact form
-  public void fillContactMainInfo(ContactMainData contactMainData) {
+  public void fillContactMainInfo(ContactData contactMainData, boolean creation) {
     clickClearAndSendkeys(name("firstname"), contactMainData.getFirst_name());
 
     clickClearAndSendkeys(name("middlename"), contactMainData.getMiddle_name());
@@ -37,52 +37,35 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("company"), contactMainData.getContact_company());
 
     clickClearAndSendkeys(name("address"), contactMainData.getGeneral_address());
-  }
 
-  public void fillContactPhones(ContactPhonesData contactPhonesData) {
-    clickClearAndSendkeys(name("home"), contactPhonesData.getHome_phone());
+    clickClearAndSendkeys(name("home"), contactMainData.getHome_phone());
 
-    clickClearAndSendkeys(name("mobile"), contactPhonesData.getMobile_phone());
+    clickClearAndSendkeys(name("mobile"), contactMainData.getMobile_phone());
 
-    clickClearAndSendkeys(name("work"), contactPhonesData.getWork_phone());
+    clickClearAndSendkeys(name("work"), contactMainData.getWork_phone());
 
-    clickClearAndSendkeys(name("fax"), contactPhonesData.getFax());
-  }
+    clickClearAndSendkeys(name("fax"), contactMainData.getFax());
 
-  public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData, boolean creation) {
-    clickClearAndSendkeys(name("email"), contactAdditionalData.getEmail());
+    clickClearAndSendkeys(name("address2"), contactMainData.getAddress_2());
 
-    clickClearAndSendkeys(name("email2"), contactAdditionalData.getEmail_2());
+    clickClearAndSendkeys(name("phone2"), contactMainData.getPhone_2());
 
-    clickClearAndSendkeys(name("email3"), contactAdditionalData.getEmail_3());
+    clickClearAndSendkeys(name("notes"), contactMainData.getNotes());
 
-    clickClearAndSendkeys(name("homepage"), contactAdditionalData.getHomepage_link());
+    clickClearAndSendkeys(name("email"), contactMainData.getEmail());
 
-    //fillContactBirthday
-    dropdownMenuSelection(xpath("//form/select[1]"),"19"); //select Birth Day
+    clickClearAndSendkeys(name("email2"), contactMainData.getEmail_2());
 
-    dropdownMenuSelection(xpath("//form/select[2]"),"March"); //select Birth Month
-    clickClearAndSendkeys(name("byear"), contactAdditionalData.getBirthYear());
+    clickClearAndSendkeys(name("email3"), contactMainData.getEmail_3());
 
-    //Anniversary
-    dropdownMenuSelection(xpath("//form/select[3]"),"30"); //select Anniversary Day
-    dropdownMenuSelection(xpath("//form/select[4]"),"July"); //select Anniversary Month
-    clickClearAndSendkeys(name("ayear"), contactAdditionalData.getAnniverYear());
+    clickClearAndSendkeys(name("homepage"), contactMainData.getHomepage_link());
 
     //creation = true -> select Group exist on the page, else - does not exist
     if (creation) {
-      new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactAdditionalData.getGroup());
+      new Select(wd.findElement(name("new_group"))).selectByVisibleText(contactMainData.getGroup());
     } else {
       Assert.assertFalse(isElementPresented(name("new_group"))); //check that element shouldn't exist
     }
-  }
-
-  public void fillContactSecondaryInfo(ContactSecondaryData contactSecondaryData) {
-    clickClearAndSendkeys(name("address2"), contactSecondaryData.getAddress_2());
-
-    clickClearAndSendkeys(name("phone2"), contactSecondaryData.getPhone_2());
-
-    clickClearAndSendkeys(name("notes"), contactSecondaryData.getNotes());
   }
 
   public void returnToContactPage() {
@@ -101,43 +84,34 @@ public class ContactHelper extends BaseHelper {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
   }
 
-  public void create(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                     ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
-    fillContactInfo(cMainData, cPhonesData, cAdditionalData, cSecondaryData);
+  public void create(ContactData cMainData) {
+    fillContactInfo(cMainData);
     submitContactCreation();
     contactCach = null;
     returnToContactPage();
   }
 
-  public void modifyContact(ContactMainData mainData, ContactPhonesData phonesData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
+  public void modifyContact(ContactData mainData) {
     editContactById(mainData.getId());
-    edit(mainData, phonesData, additionalData, secondaryData);
+    edit(mainData);
     submitContactModification();
     contactCach = null;
     returnToHomePage();
   }
 
-  public void delete(ContactMainData contact) {
+  public void delete(ContactData contact) {
     editContactById(contact.getId());
     submitDeletion();
     contactCach = null;
     returnToHomePage();
   }
 
-  public void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                               ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
-    fillContactMainInfo(cMainData);
-    fillContactPhones(cPhonesData);
-    fillContactAdditionalInfo(cAdditionalData, true);
-    fillContactSecondaryInfo(cSecondaryData);
+  public void fillContactInfo(ContactData cMainData) {
+    fillContactMainInfo(cMainData, true);
   }
 
-  public void edit(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                   ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
-    fillContactMainInfo(cMainData);
-    fillContactPhones(cPhonesData);
-    fillContactAdditionalInfo(cAdditionalData, false);
-    fillContactSecondaryInfo(cSecondaryData);
+  public void edit(ContactData cMainData) {
+    fillContactMainInfo(cMainData, false);
   }
 
   public void returnToHomePage() {
@@ -174,13 +148,13 @@ public class ContactHelper extends BaseHelper {
   }
 
   private Contacts contactCach = null;
-  
+
   public Contacts all() {
     if (contactCach != null) {
       return new Contacts(contactCach);
     }
     contactCach = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
+    List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactData class
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
@@ -189,7 +163,7 @@ public class ContactHelper extends BaseHelper {
       String allEmails = cells.get(4).getText();
       String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactMainData contact = new ContactMainData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
+      ContactData contact = new ContactData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
       contactCach.add(contact);
     }
     return new Contacts(contactCach);

@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
-public class ContactMainData {
+public class ContactData {
   private int id = 0;
   private String first_name;
   private String middle_name;
@@ -27,111 +27,111 @@ public class ContactMainData {
   private String anniverYear;
   private String group;
 
-  public ContactMainData withId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
     return this;
   }
 
-  public ContactMainData withFirst_name(String first_name) {
+  public ContactData withFirst_name(String first_name) {
     this.first_name = first_name;
     return this;
   }
 
-  public ContactMainData withMiddle_name(String middle_name) {
+  public ContactData withMiddle_name(String middle_name) {
     this.middle_name = middle_name;
     return this;
   }
 
-  public ContactMainData withLast_name(String last_name) {
+  public ContactData withLast_name(String last_name) {
     this.last_name = last_name;
     return this;
   }
 
-  public ContactMainData withNickname(String nickname) {
+  public ContactData withNickname(String nickname) {
     this.nickname = nickname;
     return this;
   }
 
-  public ContactMainData withTitle(String title) {
+  public ContactData withTitle(String title) {
     this.title = title;
     return this;
   }
 
-  public ContactMainData withContact_company(String contact_company) {
+  public ContactData withContact_company(String contact_company) {
     this.contact_company = contact_company;
     return this;
   }
 
-  public ContactMainData withGeneral_address(String general_address) {
+  public ContactData withGeneral_address(String general_address) {
     this.general_address = general_address;
     return this;
   }
-  public ContactMainData withHome_phone(String home_phone) {
+  public ContactData withHome_phone(String home_phone) {
     this.home_phone = home_phone;
     return this;
   }
 
-  public ContactMainData withMobile_phone(String mobile_phone) {
+  public ContactData withMobile_phone(String mobile_phone) {
     this.mobile_phone = mobile_phone;
     return this;
   }
 
-  public ContactMainData withWork_phone(String work_phone) {
+  public ContactData withWork_phone(String work_phone) {
     this.work_phone = work_phone;
     return this;
   }
 
-  public ContactMainData withFax(String fax) {
+  public ContactData withFax(String fax) {
     this.fax = fax;
     return this;
   }
 
-  public ContactMainData withPhone_2(String phone_2) {
+  public ContactData withPhone_2(String phone_2) {
     this.phone_2 = phone_2;
     return this;
   }
 
-  public ContactMainData withAddress_2(String address_2) {
+  public ContactData withAddress_2(String address_2) {
     this.address_2 = address_2;
     return this;
   }
 
-  public ContactMainData withNotes(String notes) {
+  public ContactData withNotes(String notes) {
     this.notes = notes;
     return this;
   }
 
-  public ContactMainData withEmail(String email) {
+  public ContactData withEmail(String email) {
     this.email = email;
     return this;
   }
 
-  public ContactMainData withEmail_2(String email_2) {
+  public ContactData withEmail_2(String email_2) {
     this.email_2 = email_2;
     return this;
   }
 
-  public ContactMainData withEmail_3(String email_3) {
+  public ContactData withEmail_3(String email_3) {
     this.email_3 = email_3;
     return this;
   }
 
-  public ContactMainData withHomepage_link(String homepage_link) {
+  public ContactData withHomepage_link(String homepage_link) {
     this.homepage_link = homepage_link;
     return this;
   }
 
-  public ContactMainData withBirthYear(String birthYear) {
+  public ContactData withBirthYear(String birthYear) {
     this.birthYear = birthYear;
     return this;
   }
 
-  public ContactMainData withAnniverYear(String anniverYear) {
+  public ContactData withAnniverYear(String anniverYear) {
     this.anniverYear = anniverYear;
     return this;
   }
 
-  public ContactMainData withGroup(String group) {
+  public ContactData withGroup(String group) {
     this.group = group;
     return this;
   }
@@ -229,7 +229,7 @@ public class ContactMainData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    ContactMainData mainData = (ContactMainData) o;
+    ContactData mainData = (ContactData) o;
 
     if (id != mainData.id) return false;
     if (first_name != null ? !first_name.equals(mainData.first_name) : mainData.first_name != null) return false;
@@ -250,7 +250,7 @@ public class ContactMainData {
 
   @Override
   public String toString() {
-    return "ContactMainData{" +
+    return "ContactData{" +
             "id='" + id + '\'' +
             ", first_name='" + first_name + '\'' +
             ", middle_name='" + middle_name + '\'' +

@@ -21,7 +21,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   // Fill in New contact form
-  public void fillContactMainInfo(ContactMainData contactMainData, boolean creation) {
+  public void fillContactMainInfo(ContactData contactMainData, boolean creation) {
     clickClearAndSendkeys(name("firstname"), contactMainData.getFirst_name());
 
     clickClearAndSendkeys(name("middlename"), contactMainData.getMiddle_name());
@@ -84,14 +84,14 @@ public class ContactHelper extends BaseHelper {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
   }
 
-  public void create(ContactMainData cMainData) {
+  public void create(ContactData cMainData) {
     fillContactInfo(cMainData);
     submitContactCreation();
     contactCach = null;
     returnToContactPage();
   }
 
-  public void modifyContact(ContactMainData mainData) {
+  public void modifyContact(ContactData mainData) {
     editContactById(mainData.getId());
     edit(mainData);
     submitContactModification();
@@ -99,18 +99,18 @@ public class ContactHelper extends BaseHelper {
     returnToHomePage();
   }
 
-  public void delete(ContactMainData contact) {
+  public void delete(ContactData contact) {
     editContactById(contact.getId());
     submitDeletion();
     contactCach = null;
     returnToHomePage();
   }
 
-  public void fillContactInfo(ContactMainData cMainData) {
+  public void fillContactInfo(ContactData cMainData) {
     fillContactMainInfo(cMainData, true);
   }
 
-  public void edit(ContactMainData cMainData) {
+  public void edit(ContactData cMainData) {
     fillContactMainInfo(cMainData, false);
   }
 
@@ -154,7 +154,7 @@ public class ContactHelper extends BaseHelper {
       return new Contacts(contactCach);
     }
     contactCach = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactMainData class
+    List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name='entry']"));//by xpath will be found element of ContactData class
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
@@ -163,7 +163,7 @@ public class ContactHelper extends BaseHelper {
       String allEmails = cells.get(4).getText();
       String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactMainData contact = new ContactMainData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
+      ContactData contact = new ContactData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
       contactCach.add(contact);
     }
     return new Contacts(contactCach);

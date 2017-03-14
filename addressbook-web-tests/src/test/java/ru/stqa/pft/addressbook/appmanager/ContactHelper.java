@@ -37,16 +37,14 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("company"), contactMainData.getContact_company());
 
     clickClearAndSendkeys(name("address"), contactMainData.getGeneral_address());
-  }
 
-  public void fillContactPhones(ContactPhonesData contactPhonesData) {
-    clickClearAndSendkeys(name("home"), contactPhonesData.getHome_phone());
+    clickClearAndSendkeys(name("home"), contactMainData.getHome_phone());
 
-    clickClearAndSendkeys(name("mobile"), contactPhonesData.getMobile_phone());
+    clickClearAndSendkeys(name("mobile"), contactMainData.getMobile_phone());
 
-    clickClearAndSendkeys(name("work"), contactPhonesData.getWork_phone());
+    clickClearAndSendkeys(name("work"), contactMainData.getWork_phone());
 
-    clickClearAndSendkeys(name("fax"), contactPhonesData.getFax());
+    clickClearAndSendkeys(name("fax"), contactMainData.getFax());
   }
 
   public void fillContactAdditionalInfo(ContactAdditionalData contactAdditionalData, boolean creation) {
@@ -101,17 +99,16 @@ public class ContactHelper extends BaseHelper {
     findElement(xpath("//div[@id='content']/form[2]/input[2]")).click();
   }
 
-  public void create(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                     ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
-    fillContactInfo(cMainData, cPhonesData, cAdditionalData, cSecondaryData);
+  public void create(ContactMainData cMainData, ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+    fillContactInfo(cMainData, cAdditionalData, cSecondaryData);
     submitContactCreation();
     contactCach = null;
     returnToContactPage();
   }
 
-  public void modifyContact(ContactMainData mainData, ContactPhonesData phonesData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
+  public void modifyContact(ContactMainData mainData, ContactAdditionalData additionalData, ContactSecondaryData secondaryData) {
     editContactById(mainData.getId());
-    edit(mainData, phonesData, additionalData, secondaryData);
+    edit(mainData, additionalData, secondaryData);
     submitContactModification();
     contactCach = null;
     returnToHomePage();
@@ -124,18 +121,14 @@ public class ContactHelper extends BaseHelper {
     returnToHomePage();
   }
 
-  public void fillContactInfo(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                               ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+  public void fillContactInfo(ContactMainData cMainData, ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactMainInfo(cMainData);
-    fillContactPhones(cPhonesData);
     fillContactAdditionalInfo(cAdditionalData, true);
     fillContactSecondaryInfo(cSecondaryData);
   }
 
-  public void edit(ContactMainData cMainData, ContactPhonesData cPhonesData,
-                   ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
+  public void edit(ContactMainData cMainData, ContactAdditionalData cAdditionalData, ContactSecondaryData cSecondaryData) {
     fillContactMainInfo(cMainData);
-    fillContactPhones(cPhonesData);
     fillContactAdditionalInfo(cAdditionalData, false);
     fillContactSecondaryInfo(cSecondaryData);
   }
@@ -174,7 +167,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   private Contacts contactCach = null;
-  
+
   public Contacts all() {
     if (contactCach != null) {
       return new Contacts(contactCach);

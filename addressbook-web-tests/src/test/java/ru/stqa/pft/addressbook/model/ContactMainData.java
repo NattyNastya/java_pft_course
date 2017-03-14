@@ -10,6 +10,23 @@ public class ContactMainData {
   private String contact_company;
   private String general_address;
 
+  private String home_phone;
+  private String mobile_phone;
+  private String work_phone;
+  private String fax;
+
+  private String phone_2;
+  private String address_2;
+  private String notes;
+
+  private String email;
+  private String email_2;
+  private String email_3;
+  private String homepage_link;
+  private String birthYear;
+  private String anniverYear;
+  private String group;
+
   public ContactMainData withId(int id) {
     this.id = id;
     return this;
@@ -49,6 +66,75 @@ public class ContactMainData {
     this.general_address = general_address;
     return this;
   }
+  public ContactMainData withHome_phone(String home_phone) {
+    this.home_phone = home_phone;
+    return this;
+  }
+
+  public ContactMainData withMobile_phone(String mobile_phone) {
+    this.mobile_phone = mobile_phone;
+    return this;
+  }
+
+  public ContactMainData withWork_phone(String work_phone) {
+    this.work_phone = work_phone;
+    return this;
+  }
+
+  public ContactMainData withFax(String fax) {
+    this.fax = fax;
+    return this;
+  }
+
+  public ContactMainData withPhone_2(String phone_2) {
+    this.phone_2 = phone_2;
+    return this;
+  }
+
+  public ContactMainData withAddress_2(String address_2) {
+    this.address_2 = address_2;
+    return this;
+  }
+
+  public ContactMainData withNotes(String notes) {
+    this.notes = notes;
+    return this;
+  }
+
+  public ContactMainData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactMainData withEmail_2(String email_2) {
+    this.email_2 = email_2;
+    return this;
+  }
+
+  public ContactMainData withEmail_3(String email_3) {
+    this.email_3 = email_3;
+    return this;
+  }
+
+  public ContactMainData withHomepage_link(String homepage_link) {
+    this.homepage_link = homepage_link;
+    return this;
+  }
+
+  public ContactMainData withBirthYear(String birthYear) {
+    this.birthYear = birthYear;
+    return this;
+  }
+
+  public ContactMainData withAnniverYear(String anniverYear) {
+    this.anniverYear = anniverYear;
+    return this;
+  }
+
+  public ContactMainData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -80,6 +166,62 @@ public class ContactMainData {
 
   public String getGeneral_address() {
     return general_address;
+  }
+
+  public String getHome_phone() {
+    return home_phone;
+  }
+
+  public String getMobile_phone() {
+    return mobile_phone;
+  }
+
+  public String getWork_phone() {
+    return work_phone;
+  }
+
+  public String getFax() {
+    return fax;
+  }
+
+  public String getPhone_2() {
+    return phone_2;
+  }
+
+  public String getAddress_2() {
+    return address_2;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getEmail_2() {
+    return email_2;
+  }
+
+  public String getEmail_3() {
+    return email_3;
+  }
+
+  public String getHomepage_link() {
+    return homepage_link;
+  }
+
+  public String getBirthYear() {
+    return birthYear;
+  }
+
+  public String getAnniverYear() {
+    return anniverYear;
+  }
+
+  public String getGroup() {
+    return group;
   }
 
   @Override

@@ -89,6 +89,8 @@ public class ContactHelper extends BaseHelper {
       return;
     }
     wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id + "']")).click();
+    //the same will be
+    //wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
   }
 
   public boolean isThereAContact() {
@@ -115,11 +117,13 @@ public class ContactHelper extends BaseHelper {
       String allEmails = cells.get(4).getText();
       String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactData contact = new ContactData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address);
+      ContactData contact = new ContactData().withId(id).withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address).withHome_phone(phones[0]).withMobile_phone(phones[1]).withWork_phone(phones[2]).withPhone_2(phones[3]);
       contactCach.add(contact);
     }
     return new Contacts(contactCach);
   }
+
+
 
   // Fill in New contact form
   public void fillContactInfo(ContactData contactData, boolean creation) {
@@ -151,5 +155,17 @@ public class ContactHelper extends BaseHelper {
     } else {
       Assert.assertFalse(isElementPresented(name("new_group"))); //check that element shouldn't exist
     }
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    editContactById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    String home_2 = wd.findElement(By.name("phone2")).getAttribute("value");
+    returnToContactPage();
+    return new ContactData().withHome_phone(home).withMobile_phone(mobile).withWork_phone(work).withPhone_2(home_2);
   }
 }

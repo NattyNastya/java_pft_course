@@ -23,6 +23,7 @@ public class ContactData {
   private String email;
   private String email_2;
   private String email_3;
+  private String allEmails;
   private String homepage_link;
   private String birthYear;
   private String anniverYear;
@@ -122,6 +123,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
   public ContactData withHomepage_link(String homepage_link) {
     this.homepage_link = homepage_link;
     return this;
@@ -216,6 +222,10 @@ public class ContactData {
 
   public String getEmail_3() {
     return email_3;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
   }
 
   public String getHomepage_link() {

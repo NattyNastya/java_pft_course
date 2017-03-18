@@ -4,6 +4,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -29,13 +32,17 @@ public class ContactPhoneTests extends TestBase {
     ContactData contact = app.contact().all().iterator().next();
     ContactData cInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getHome_phone(), equalTo(cleaned(cInfoFromEditForm.getHome_phone())));
-    assertThat(contact.getMobile_phone(), equalTo(cleaned(cInfoFromEditForm.getMobile_phone())));
-    assertThat(contact.getWork_phone(), equalTo(cleaned(cInfoFromEditForm.getWork_phone())));
-    assertThat(contact.getPhone_2(), equalTo(cleaned(cInfoFromEditForm.getPhone_2())));
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(cInfoFromEditForm)));
   }
 
-  public String cleaned(String phone) {
+  private String mergePhones(ContactData contact) {
+    return Arrays.asList(contact.getHome_phone(), contact.getMobile_phone(), contact.getWork_phone(), contact.getPhone_2())
+            .stream().filter((s -> !s.equals(""))) //now the current stream doesn't have empty values/string
+            .map(ContactPhoneTests::cleaned) //clean the stream
+            .collect(Collectors.joining("\n")); // join all the elements of the stream to get one string with all elements
+  }
+
+  public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 

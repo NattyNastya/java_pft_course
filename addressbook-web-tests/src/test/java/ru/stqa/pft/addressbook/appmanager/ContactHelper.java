@@ -93,6 +93,17 @@ public class ContactHelper extends BaseHelper {
     //wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
   }
 
+  public void viewContactById(int id) {
+    if (isElementPresented(By.xpath(".//*[@id='content']/b"))
+            && isElementPresented(By.name("modifiy"))
+            && isElementPresented(By.name("print"))) {
+      return;
+    }
+    wd.findElement(By.cssSelector("a[href*='view.php?id=" + id + "']")).click();
+    //the same will be
+    //wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+  }
+
   public boolean isThereAContact() {
     return isElementPresented(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]"));
   }
@@ -172,4 +183,14 @@ public class ContactHelper extends BaseHelper {
     returnToContactPage();
     return new ContactData().withFirst_name(firstname).withLast_name(lastname).withGeneral_address(address).withHome_phone(home).withMobile_phone(mobile).withWork_phone(work).withPhone_2(home_2).withEmail(email).withEmail_2(email2).withEmail_3(email3);
   }
+
+  public String contactDetails() {
+    String details = wd.findElement(By.xpath("//*[@id='content']")).getText();
+    return details;
+  }
+
+  /*public ContactData infoFromViewPage(ContactData contact) {
+    viewContactById(contact.getId());
+    return String allData = String.valueOf(wd.findElement(By.name("/*//*[@id='content']")));
+  }*/
 }

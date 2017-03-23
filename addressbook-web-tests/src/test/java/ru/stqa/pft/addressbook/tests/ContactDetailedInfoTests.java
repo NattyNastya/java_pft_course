@@ -1,10 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -35,14 +33,24 @@ public class ContactDetailedInfoTests extends TestBase {
     app.contact().returnToHomePage();
     app.contact().viewContactById(contact.getId());
     String contactViewInfo = app.contact().contactDetails();
-    assertThat(cleanedViewInfo(contactViewInfo), equalTo(mergeAll(contactInfoFromEditForm)));
+    assertThat(clean(contactViewInfo), equalTo(mergeAll(contactInfoFromEditForm)));
   }
 
-  private String cleanedViewInfo(String contactViewInfo) {
-    return contactViewInfo.replaceAll("H:", "").replaceAll("M:", "").replaceAll("W:", "").replaceAll("P:", "").replaceAll("Modify", "").replaceAll("Print", "").replaceAll("\n\n", "\n").replaceAll("\n\n\n\n", "");
+  private static String clean(String contactViewInfo) {
+    return contactViewInfo.replaceAll("[HMWP]: ", "").replaceAll("Modify", "").replaceAll("Print", "").replaceAll("\n\n\n\n", "\n").replaceAll("\n\n", "\n")/*.replaceAll("\\s", "").replaceAll("[-()]", "")*/;
   }
 
-  private String mergeAll(ContactData contact) {
-    return Arrays.asList(contact.getFirst_name(), contact.getLast_name(), contact.getGeneral_address(), contact.getHome_phone(), contact.getMobile_phone(), contact.getWork_phone(), contact.getAllEmails(), contact.getPhone_2()).stream().filter((s -> !s.equals(""))).map(String::trim).collect(Collectors.joining("\n"));
+  private String mergeOtherInformation(ContactData contact) {
+    return Arrays.asList(contact.getGeneral_address(), contact.getHome_phone(), contact.getMobile_phone(), contact.getWork_phone(), contact.getEmail(), contact.getEmail_2(), contact.getEmail_3(), contact.getPhone_2()).stream().filter(s -> !(s == null || s.equals(""))).map(ContactDetailedInfoTests::clean).collect(Collectors.joining("\n"));
+  }
+
+  private String mergeNames(ContactData contact) {
+    return Arrays.asList(contact.getFirst_name().replaceAll("\n", ""), contact.getLast_name()).stream().filter(s -> !(s == null || s.equals("")))
+            .map(ContactDetailedInfoTests::clean)
+            .collect(Collectors.joining(" "));
+  }
+
+  private String mergeAll (ContactData contact) {
+    return Arrays.asList(mergeNames(contact), mergeOtherInformation(contact)).stream().collect(Collectors.joining("\n"));
   }
 }

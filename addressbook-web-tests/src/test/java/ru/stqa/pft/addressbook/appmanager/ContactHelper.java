@@ -134,8 +134,6 @@ public class ContactHelper extends BaseHelper {
     return new Contacts(contactCach);
   }
 
-
-
   // Fill in New contact form
   public void fillContactInfo(ContactData contactData, boolean creation) {
     clickClearAndSendkeys(name("firstname"), contactData.getFirst_name());
@@ -144,6 +142,7 @@ public class ContactHelper extends BaseHelper {
     clickClearAndSendkeys(name("nickname"), contactData.getNickname());
 
     //Here will be photo selection
+    attach(name("photo"), contactData.getPhoto());
 
     clickClearAndSendkeys(name("title"), contactData.getTitle());
     clickClearAndSendkeys(name("company"), contactData.getContact_company());
